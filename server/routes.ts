@@ -323,6 +323,66 @@ export async function registerRoutes(app: Express): Promise<Server> {
     });
   }));
   
+  // Create a new blog post (protected route)
+  app.post("/api/admin/blog-posts", errorHandler(async (req: Request, res: Response) => {
+    // In a real app, you'd have authentication here
+    // For demonstration purposes only
+    
+    const blogPostData = insertBlogPostSchema.parse(req.body);
+    
+    const blogPost = await storage.createBlogPost(blogPostData);
+    
+    res.status(201).json({
+      success: true,
+      data: blogPost
+    });
+  }));
+  
+  // Update a blog post (protected route)
+  app.put("/api/admin/blog-posts/:id", errorHandler(async (req: Request, res: Response) => {
+    // In a real app, you'd have authentication here
+    // For demonstration purposes only
+    
+    const id = parseInt(req.params.id);
+    const blogPostData = req.body;
+    
+    const updatedBlogPost = await storage.updateBlogPost(id, blogPostData);
+    
+    if (!updatedBlogPost) {
+      return res.status(404).json({
+        success: false,
+        message: "Blog post not found"
+      });
+    }
+    
+    res.status(200).json({
+      success: true,
+      data: updatedBlogPost
+    });
+  }));
+  
+  // Delete a blog post (protected route)
+  app.delete("/api/admin/blog-posts/:id", errorHandler(async (req: Request, res: Response) => {
+    // In a real app, you'd have authentication here
+    // For demonstration purposes only
+    
+    const id = parseInt(req.params.id);
+    
+    const success = await storage.deleteBlogPost(id);
+    
+    if (!success) {
+      return res.status(404).json({
+        success: false,
+        message: "Blog post not found"
+      });
+    }
+    
+    res.status(200).json({
+      success: true,
+      message: "Blog post deleted successfully"
+    });
+  }));
+  
   // --- STATISTICS ROUTES ---
   
   // Get user statistics
@@ -341,6 +401,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.status(200).json({
       success: true,
       data: stats
+    });
+  }));
+  
+  // Create or update statistics (protected route)
+  app.post("/api/admin/statistics", errorHandler(async (req: Request, res: Response) => {
+    // In a real app, you'd have authentication here
+    // For demonstration purposes only
+    
+    const statisticData = insertStatisticSchema.parse(req.body);
+    
+    const statistic = await storage.createOrUpdateStatistics(statisticData);
+    
+    res.status(201).json({
+      success: true,
+      data: statistic
     });
   }));
 
