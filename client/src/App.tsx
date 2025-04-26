@@ -9,6 +9,7 @@ import TechStackCarousel from "./components/TechStackCarousel";
 import SkillsSection from "./components/SkillsSection";
 import AboutSection from "./components/AboutSection";
 import BlogSection from "./components/BlogSection";
+import Timeline from "./components/Timeline";
 import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
 
@@ -23,6 +24,7 @@ function App() {
             <ProjectsSection />
             <TechStackCarousel />
             <SkillsSection />
+            <Timeline />
             <AboutSection />
             <BlogSection />
             <ContactSection />

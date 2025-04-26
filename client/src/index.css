@@ -15,11 +15,11 @@
   --card-foreground: 0 0% 98%;
   --border: 240 3.7% 15.9%;
   --input: 240 3.7% 15.9%;
-  --primary: 328 100% 68%;
+  --primary: 270 100% 60%; /* Purple primary */
   --primary-foreground: 0 0% 100%;
-  --secondary: 240 3.7% 15.9%;
+  --secondary: 328 100% 65%; /* Pink secondary */
   --secondary-foreground: 0 0% 98%;
-  --accent: 240 3.7% 15.9%;
+  --accent: 288 95% 75%; /* Light purple accent */
   --accent-foreground: 0 0% 98%;
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 0% 98%;
@@ -38,11 +38,11 @@
   --card-foreground: 240 10% 3.9%;
   --border: 240 5.9% 90%;
   --input: 240 5.9% 90%;
-  --primary: 328 85% 60%;
+  --primary: 268 75% 55%; /* Purple primary for light mode */
   --primary-foreground: 0 0% 100%;
-  --secondary: 240 4.8% 95.9%;
-  --secondary-foreground: 240 5.9% 10%;
-  --accent: 240 4.8% 95.9%;
+  --secondary: 328 85% 60%; /* Pink secondary for light mode */
+  --secondary-foreground: 0 0% 98%;
+  --accent: 288 75% 85%; /* Light purple accent for light mode */
   --accent-foreground: 240 5.9% 10%;
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 0 0% 98%;
@@ -98,7 +98,7 @@
     right: -5px;
     bottom: -5px;
     z-index: -1;
-    background: linear-gradient(45deg, hsl(var(--primary)), hsl(var(--primary)/0.7), hsl(var(--primary)/0.4), hsl(var(--primary)));
+    background: linear-gradient(45deg, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--accent)), hsl(var(--primary)));
     background-size: 400% 400%;
     border-radius: 50%;
     animation: borderAnimation 8s ease infinite;
@@ -117,5 +117,75 @@
   @keyframes scroll {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
+  }
+  
+  /* Timeline styles */
+  .timeline-container {
+    @apply relative;
+  }
+  
+  .timeline-container::after {
+    content: '';
+    @apply absolute top-0 bottom-0 w-1 bg-gradient-to-b from-primary via-secondary to-accent left-1/2 transform -translate-x-1/2;
+  }
+  
+  .timeline-item {
+    @apply relative w-full mb-16 last:mb-0;
+  }
+  
+  .timeline-item::after {
+    content: '🕒';
+    @apply absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/4 w-8 h-8 rounded-full text-lg flex items-center justify-center z-10;
+  }
+  
+  .timeline-item.left::after {
+    @apply bg-primary/10;
+  }
+  
+  .timeline-item.right::after {
+    @apply bg-secondary/10;
+  }
+  
+  .timeline-content {
+    @apply relative w-[calc(50%-40px)] p-6 rounded-lg bg-card/80 backdrop-blur-sm border border-border shadow-lg transition-all duration-300 hover:shadow-xl;
+  }
+  
+  .timeline-item.left .timeline-content {
+    @apply ml-auto rounded-tr-none border-l-4 border-l-primary;
+  }
+  
+  .timeline-item.right .timeline-content {
+    @apply mr-auto rounded-tl-none border-r-4 border-r-secondary;
+  }
+  
+  .timeline-date {
+    @apply inline-block px-3 py-1 mb-2 text-xs rounded-full bg-primary/20 text-primary-foreground font-medium;
+  }
+  
+  .timeline-title {
+    @apply text-xl font-bold mb-2 text-card-foreground;
+  }
+  
+  .timeline-description {
+    @apply text-sm text-muted-foreground;
+  }
+  
+  @media (max-width: 768px) {
+    .timeline-container::after {
+      @apply left-6;
+    }
+    
+    .timeline-item::after {
+      @apply left-6;
+    }
+    
+    .timeline-content {
+      @apply w-[calc(100%-60px)] ml-auto;
+    }
+    
+    .timeline-item.left .timeline-content,
+    .timeline-item.right .timeline-content {
+      @apply ml-auto rounded-tl-none border-l-4 border-r-0 border-l-primary;
+    }
   }
 }
