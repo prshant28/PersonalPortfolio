@@ -1,48 +1,288 @@
-import type { Express, Request, Response } from "express";
+import type { Express, Request, Response, NextFunction } from "express";
 import { createServer, type Server } from "http";
 import { z } from "zod";
 import { storage } from "./storage";
+import { 
+  insertContactMessageSchema, 
+  insertProjectSchema,
+  insertSkillSchema,
+  insertBlogPostSchema,
+  insertStatisticSchema
+} from "@shared/schema";
 
-// Contact form schema
+// Contact form schema for validation
 const contactSchema = z.object({
-  name: z.string().min(2),
-  email: z.string().email(),
-  subject: z.string().min(5),
-  message: z.string().min(10),
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  subject: z.string().min(5, "Subject must be at least 5 characters"),
+  message: z.string().min(10, "Message must be at least 10 characters"),
 });
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // API route for contact form submissions
-  app.post("/api/contact", async (req: Request, res: Response) => {
-    try {
-      // Validate form data
-      const validatedData = contactSchema.parse(req.body);
-      
-      // In a real-world app, you might want to store this in a database
-      // or send an email using a service like nodemailer
-      
-      // For now, we'll just log it and return success
-      console.log("Contact form submission:", validatedData);
-      
-      res.status(200).json({ 
-        success: true, 
-        message: "Your message has been received! I'll get back to you soon." 
-      });
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        res.status(400).json({ 
-          success: false, 
-          message: "Validation error", 
-          errors: error.errors 
-        });
-      } else {
-        res.status(500).json({ 
-          success: false, 
-          message: "Failed to process your request. Please try again later." 
-        });
+  // Middleware to handle errors
+  const errorHandler = (fn: (req: Request, res: Response, next: NextFunction) => Promise<void>) => {
+    return async (req: Request, res: Response, next: NextFunction) => {
+      try {
+        await fn(req, res, next);
+      } catch (error) {
+        if (error instanceof z.ZodError) {
+          res.status(400).json({ 
+            success: false, 
+            message: "Validation error", 
+            errors: error.errors 
+          });
+        } else {
+          console.error("API Error:", error);
+          res.status(500).json({ 
+            success: false, 
+            message: "Failed to process your request. Please try again later." 
+          });
+        }
       }
+    };
+  };
+
+  // --- CONTACT ROUTES ---
+  
+  // Save contact form submissions
+  app.post("/api/contact", errorHandler(async (req: Request, res: Response) => {
+    // Validate form data
+    const validatedData = contactSchema.parse(req.body);
+    
+    // Save to database
+    const message = await storage.createContactMessage(validatedData);
+    
+    res.status(201).json({ 
+      success: true, 
+      message: "Your message has been received! I'll get back to you soon.",
+      data: { id: message.id }
+    });
+  }));
+
+  // Get all contact messages (protected route, would require auth in a real app)
+  app.get("/api/admin/contact-messages", errorHandler(async (req: Request, res: Response) => {
+    // In a real app, you'd have authentication here
+    // For demonstration purposes only
+    
+    const limit = req.query.limit ? parseInt(req.query.limit as string) : undefined;
+    const offset = req.query.offset ? parseInt(req.query.offset as string) : undefined;
+    const read = req.query.read ? req.query.read === 'true' : undefined;
+    
+    const messages = await storage.getAllContactMessages({ limit, offset, read });
+    
+    res.status(200).json({
+      success: true,
+      data: messages
+    });
+  }));
+
+  // --- PROJECT ROUTES ---
+  
+  // Get all projects
+  app.get("/api/projects", errorHandler(async (req: Request, res: Response) => {
+    const limit = req.query.limit ? parseInt(req.query.limit as string) : undefined;
+    const offset = req.query.offset ? parseInt(req.query.offset as string) : undefined;
+    const featured = req.query.featured ? req.query.featured === 'true' : undefined;
+    
+    const projects = await storage.getAllProjects({ limit, offset, featured });
+    
+    res.status(200).json({
+      success: true,
+      data: projects
+    });
+  }));
+  
+  // Get a specific project
+  app.get("/api/projects/:id", errorHandler(async (req: Request, res: Response) => {
+    const id = parseInt(req.params.id);
+    
+    const project = await storage.getProject(id);
+    
+    if (!project) {
+      return res.status(404).json({
+        success: false,
+        message: "Project not found"
+      });
     }
-  });
+    
+    res.status(200).json({
+      success: true,
+      data: project
+    });
+  }));
+  
+  // Get projects by category
+  app.get("/api/projects/category/:category", errorHandler(async (req: Request, res: Response) => {
+    const category = req.params.category;
+    
+    const projects = await storage.getProjectsByCategory(category);
+    
+    res.status(200).json({
+      success: true,
+      data: projects
+    });
+  }));
+  
+  // Create a new project (protected route)
+  app.post("/api/admin/projects", errorHandler(async (req: Request, res: Response) => {
+    // In a real app, you'd have authentication here
+    // For demonstration purposes only
+    
+    const projectData = insertProjectSchema.parse(req.body);
+    
+    const project = await storage.createProject(projectData);
+    
+    res.status(201).json({
+      success: true,
+      data: project
+    });
+  }));
+  
+  // Update a project (protected route)
+  app.put("/api/admin/projects/:id", errorHandler(async (req: Request, res: Response) => {
+    // In a real app, you'd have authentication here
+    // For demonstration purposes only
+    
+    const id = parseInt(req.params.id);
+    const projectData = req.body;
+    
+    const updatedProject = await storage.updateProject(id, projectData);
+    
+    if (!updatedProject) {
+      return res.status(404).json({
+        success: false,
+        message: "Project not found"
+      });
+    }
+    
+    res.status(200).json({
+      success: true,
+      data: updatedProject
+    });
+  }));
+  
+  // Delete a project (protected route)
+  app.delete("/api/admin/projects/:id", errorHandler(async (req: Request, res: Response) => {
+    // In a real app, you'd have authentication here
+    // For demonstration purposes only
+    
+    const id = parseInt(req.params.id);
+    
+    const success = await storage.deleteProject(id);
+    
+    if (!success) {
+      return res.status(404).json({
+        success: false,
+        message: "Project not found"
+      });
+    }
+    
+    res.status(200).json({
+      success: true,
+      message: "Project deleted successfully"
+    });
+  }));
+  
+  // --- SKILL ROUTES ---
+  
+  // Get skills by category
+  app.get("/api/skills/category/:category", errorHandler(async (req: Request, res: Response) => {
+    const category = req.params.category;
+    
+    const skills = await storage.getSkillsByCategory(category);
+    
+    res.status(200).json({
+      success: true,
+      data: skills
+    });
+  }));
+  
+  // Get skills by user ID
+  app.get("/api/skills/user/:userId", errorHandler(async (req: Request, res: Response) => {
+    const userId = parseInt(req.params.userId);
+    
+    const skills = await storage.getSkillsByUserId(userId);
+    
+    res.status(200).json({
+      success: true,
+      data: skills
+    });
+  }));
+  
+  // --- BLOG POST ROUTES ---
+  
+  // Get all blog posts
+  app.get("/api/blog-posts", errorHandler(async (req: Request, res: Response) => {
+    const limit = req.query.limit ? parseInt(req.query.limit as string) : undefined;
+    const offset = req.query.offset ? parseInt(req.query.offset as string) : undefined;
+    const published = req.query.published ? req.query.published === 'true' : true; // Default to published only
+    
+    const posts = await storage.getAllBlogPosts({ limit, offset, published });
+    
+    res.status(200).json({
+      success: true,
+      data: posts
+    });
+  }));
+  
+  // Get a blog post by slug
+  app.get("/api/blog-posts/slug/:slug", errorHandler(async (req: Request, res: Response) => {
+    const slug = req.params.slug;
+    
+    const post = await storage.getBlogPostBySlug(slug);
+    
+    if (!post) {
+      return res.status(404).json({
+        success: false,
+        message: "Blog post not found"
+      });
+    }
+    
+    res.status(200).json({
+      success: true,
+      data: post
+    });
+  }));
+  
+  // Get a specific blog post
+  app.get("/api/blog-posts/:id", errorHandler(async (req: Request, res: Response) => {
+    const id = parseInt(req.params.id);
+    
+    const post = await storage.getBlogPost(id);
+    
+    if (!post) {
+      return res.status(404).json({
+        success: false,
+        message: "Blog post not found"
+      });
+    }
+    
+    res.status(200).json({
+      success: true,
+      data: post
+    });
+  }));
+  
+  // --- STATISTICS ROUTES ---
+  
+  // Get user statistics
+  app.get("/api/statistics/:userId", errorHandler(async (req: Request, res: Response) => {
+    const userId = parseInt(req.params.userId);
+    
+    const stats = await storage.getStatistics(userId);
+    
+    if (!stats) {
+      return res.status(404).json({
+        success: false,
+        message: "Statistics not found for this user"
+      });
+    }
+    
+    res.status(200).json({
+      success: true,
+      data: stats
+    });
+  }));
 
   // Download CV route
   app.get("/api/download-cv", (req: Request, res: Response) => {
