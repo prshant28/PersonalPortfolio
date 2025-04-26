@@ -231,23 +231,24 @@ export class DatabaseStorage implements IStorage {
   }
   
   async getAllContactMessages(options?: { limit?: number, offset?: number, read?: boolean }): Promise<ContactMessage[]> {
-    let query = db.select().from(contactMessages);
+    let queryBuilder = db.select().from(contactMessages);
     
     if (options?.read !== undefined) {
-      query = query.where(eq(contactMessages.isRead, options.read));
+      queryBuilder = queryBuilder.where(eq(contactMessages.isRead, options.read));
     }
     
-    query = query.orderBy(desc(contactMessages.createdAt));
+    queryBuilder = queryBuilder.orderBy(desc(contactMessages.createdAt));
     
     if (options?.limit) {
-      query = query.limit(options.limit);
+      queryBuilder = queryBuilder.limit(options.limit);
     }
     
     if (options?.offset) {
-      query = query.offset(options.offset);
+      queryBuilder = queryBuilder.offset(options.offset);
     }
     
-    return await query;
+    const result = await queryBuilder;
+    return result;
   }
   
   async createContactMessage(message: InsertContactMessage): Promise<ContactMessage> {
@@ -275,6 +276,10 @@ export class DatabaseStorage implements IStorage {
   }
   
   async createOrUpdateStatistics(statistic: InsertStatistic): Promise<Statistic> {
+    if (!statistic.userId) {
+      throw new Error("User ID is required for statistics");
+    }
+    
     // Check if statistics already exist for this user
     const existingStat = await this.getStatistics(statistic.userId);
     
