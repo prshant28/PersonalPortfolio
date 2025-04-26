@@ -209,6 +209,66 @@ export async function registerRoutes(app: Express): Promise<Server> {
     });
   }));
   
+  // Create a new skill (protected route)
+  app.post("/api/admin/skills", errorHandler(async (req: Request, res: Response) => {
+    // In a real app, you'd have authentication here
+    // For demonstration purposes only
+    
+    const skillData = insertSkillSchema.parse(req.body);
+    
+    const skill = await storage.createSkill(skillData);
+    
+    res.status(201).json({
+      success: true,
+      data: skill
+    });
+  }));
+  
+  // Update a skill (protected route)
+  app.put("/api/admin/skills/:id", errorHandler(async (req: Request, res: Response) => {
+    // In a real app, you'd have authentication here
+    // For demonstration purposes only
+    
+    const id = parseInt(req.params.id);
+    const skillData = req.body;
+    
+    const updatedSkill = await storage.updateSkill(id, skillData);
+    
+    if (!updatedSkill) {
+      return res.status(404).json({
+        success: false,
+        message: "Skill not found"
+      });
+    }
+    
+    res.status(200).json({
+      success: true,
+      data: updatedSkill
+    });
+  }));
+  
+  // Delete a skill (protected route)
+  app.delete("/api/admin/skills/:id", errorHandler(async (req: Request, res: Response) => {
+    // In a real app, you'd have authentication here
+    // For demonstration purposes only
+    
+    const id = parseInt(req.params.id);
+    
+    const success = await storage.deleteSkill(id);
+    
+    if (!success) {
+      return res.status(404).json({
+        success: false,
+        message: "Skill not found"
+      });
+    }
+    
+    res.status(200).json({
+      success: true,
+      message: "Skill deleted successfully"
+    });
+  }));
+  
   // --- BLOG POST ROUTES ---
   
   // Get all blog posts
