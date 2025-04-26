@@ -8,6 +8,7 @@ export default {
       fontFamily: {
         inter: ["Inter", "sans-serif"],
         poppins: ["Poppins", "sans-serif"],
+        alegreya: ["Alegreya Sans SC", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
