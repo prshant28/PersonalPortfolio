@@ -9,6 +9,8 @@ interface MouseContextType {
   activateCursor: () => void;
   deactivateCursor: () => void;
   setLinkHover: (isHovering: boolean) => void;
+  isLinkHovered: boolean;
+  isActive: boolean;
 }
 
 const MouseContext = createContext<MouseContextType>({
@@ -18,6 +20,8 @@ const MouseContext = createContext<MouseContextType>({
   activateCursor: () => {},
   deactivateCursor: () => {},
   setLinkHover: () => {},
+  isLinkHovered: false,
+  isActive: false,
 });
 
 export const useMouseInteraction = () => useContext(MouseContext);
@@ -100,31 +104,31 @@ export const MouseInteractionProvider: React.FC<Props> = ({ children }) => {
     // Handle magnetic elements
     const magneticElements = document.querySelectorAll('.magnetic-effect');
     
-    const handleMagneticHover = (e: MouseEvent) => {
+    const handleMagneticHover = (e: Event) => {
+      if (!(e instanceof MouseEvent)) return;
       const element = e.currentTarget as HTMLElement;
-      document.addEventListener('mousemove', (e) => {
-        updateElementPosition(element, e.clientX, e.clientY);
-      });
-    };
-    
-    const handleMagneticLeave = (e: MouseEvent) => {
-      const element = e.currentTarget as HTMLElement;
-      element.style.transform = 'translate(0, 0)';
-      document.removeEventListener('mousemove', (e) => {
-        updateElementPosition(element, e.clientX, e.clientY);
-      });
+      
+      const moveHandler = (moveEvent: MouseEvent) => {
+        updateElementPosition(element, moveEvent.clientX, moveEvent.clientY);
+      };
+      
+      document.addEventListener('mousemove', moveHandler);
+      
+      element.addEventListener('mouseleave', () => {
+        element.style.transform = 'translate(0, 0)';
+        document.removeEventListener('mousemove', moveHandler);
+      }, { once: true });
     };
     
     // Add event listeners
     const links = document.querySelectorAll('a, button, .hoverable');
     links.forEach((link) => {
-      link.addEventListener('mouseenter', handleLinkHover);
-      link.addEventListener('mouseleave', handleLinkLeave);
+      link.addEventListener('mouseenter', handleLinkHover as EventListener);
+      link.addEventListener('mouseleave', handleLinkLeave as EventListener);
     });
     
     magneticElements.forEach((element) => {
-      element.addEventListener('mouseenter', handleMagneticHover);
-      element.addEventListener('mouseleave', handleMagneticLeave);
+      element.addEventListener('mouseenter', handleMagneticHover as EventListener);
     });
     
     document.addEventListener('mousedown', handleButtonDown);
@@ -133,13 +137,12 @@ export const MouseInteractionProvider: React.FC<Props> = ({ children }) => {
     // Cleanup
     return () => {
       links.forEach((link) => {
-        link.removeEventListener('mouseenter', handleLinkHover);
-        link.removeEventListener('mouseleave', handleLinkLeave);
+        link.removeEventListener('mouseenter', handleLinkHover as EventListener);
+        link.removeEventListener('mouseleave', handleLinkLeave as EventListener);
       });
       
       magneticElements.forEach((element) => {
-        element.removeEventListener('mouseenter', handleMagneticHover);
-        element.removeEventListener('mouseleave', handleMagneticLeave);
+        element.removeEventListener('mouseenter', handleMagneticHover as EventListener);
       });
       
       document.removeEventListener('mousedown', handleButtonDown);
@@ -156,6 +159,8 @@ export const MouseInteractionProvider: React.FC<Props> = ({ children }) => {
         activateCursor: () => setIsActive(true),
         deactivateCursor: () => setIsActive(false),
         setLinkHover: setIsLinkHovered,
+        isLinkHovered,
+        isActive
       }}
     >
       {children}

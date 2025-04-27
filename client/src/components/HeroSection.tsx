@@ -289,8 +289,12 @@ const HeroSection = () => {
                 className="profile-image hoverable glow-on-hover w-64 h-64 sm:w-80 sm:h-80 xl:w-96 xl:h-96 shadow-2xl rounded-full overflow-hidden relative z-10"
                 style={{ 
                   x: imgPosition.x, 
-                  y: imgPosition.y,
-                  transition: { type: "spring", stiffness: 150, damping: 15 }
+                  y: imgPosition.y
+                }}
+                transition={{ 
+                  type: "spring", 
+                  stiffness: 150, 
+                  damping: 15 
                 }}
                 whileHover={{ scale: 1.03 }}
                 drag
