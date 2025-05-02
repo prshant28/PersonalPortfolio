@@ -2,8 +2,8 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Download, ArrowRight, Github, Linkedin, Mail, Code, Palette, Lightbulb, Star, Sparkles, Trophy, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import TypingEffect from "./TypingEffect";
-import { useRef, useState, useEffect } from "react";
-import { useMousePosition, useParallaxEffect } from "@/hooks/use-mouse-position";
+import { useRef } from "react";
+import profileImage from "../assets/profile.png";
 
 const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -12,40 +12,8 @@ const HeroSection = () => {
     offset: ["start start", "end start"]
   });
   
-  const mousePosition = useMousePosition();
-  const { x: mouseX, y: mouseY } = useParallaxEffect(40);
-  
   const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  
-  // State for mouse position on interactive elements
-  const [imgPosition, setImgPosition] = useState({ x: 0, y: 0 });
-  
-  // Update element positions based on mouse movement
-  useEffect(() => {
-    const handleMouseMove = () => {
-      const profileImg = document.querySelector('.profile-image');
-      if (profileImg && profileImg instanceof HTMLElement) {
-        const rect = profileImg.getBoundingClientRect();
-        const x = mousePosition.x - (rect.left + rect.width / 2);
-        const y = mousePosition.y - (rect.top + rect.height / 2);
-        const distance = Math.sqrt(x * x + y * y);
-        const maxDistance = Math.max(window.innerWidth, window.innerHeight) / 2;
-        
-        // Only move if mouse is within reasonable distance
-        if (distance < maxDistance) {
-          // Calculate movement (move more when closer)
-          const strength = 15;
-          const moveX = (x / maxDistance) * strength;
-          const moveY = (y / maxDistance) * strength;
-          setImgPosition({ x: moveX, y: moveY });
-        }
-      }
-    };
-    
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [mousePosition]);
   
   // Texts for the typing effect
   const typingTexts = [
@@ -167,7 +135,7 @@ const HeroSection = () => {
               Passionate about creating beautiful and functional web experiences with attention to detail and focus on user experience. Let's build something amazing together!
             </motion.p>
             
-            {/* SEO-optimized section */}
+            {/* SEO-optimized section - enhanced with more details */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -175,7 +143,17 @@ const HeroSection = () => {
               className="mb-8 bg-card/20 backdrop-blur-sm p-4 rounded-lg border border-primary/10"
             >
               <h3 className="text-sm font-medium text-secondary mb-2">Web Developer & UI/UX Designer in India</h3>
-              <p className="text-xs text-muted-foreground">Specializing in React, Next.js, Node.js and modern web technologies. Creating beautiful, responsive and user-friendly websites with focus on performance and accessibility.</p>
+              <p className="text-xs text-muted-foreground">
+                Specializing in React, Next.js, Node.js and modern web technologies. Creating beautiful, responsive and 
+                user-friendly websites with focus on performance and accessibility. Offering comprehensive web development 
+                services including e-commerce solutions, portfolio websites, and business applications.
+              </p>
+              <div className="mt-2 grid grid-cols-2 gap-1 text-xs">
+                <div>• React/Next.js Expert</div>
+                <div>• UI/UX Designer</div>
+                <div>• Responsive Web Design</div>
+                <div>• Web Performance Expert</div>
+              </div>
             </motion.div>
             
             {/* Social Icons with improved animations */}
@@ -284,69 +262,24 @@ const HeroSection = () => {
                 }}
               />
               
-              {/* Profile image with enhanced animated border and mouse interaction */}
+              {/* Profile image with simple border */}
               <motion.div 
-                className="profile-image hoverable glow-on-hover w-64 h-64 sm:w-80 sm:h-80 xl:w-96 xl:h-96 shadow-2xl rounded-full overflow-hidden relative z-10"
-                style={{ 
-                  x: imgPosition.x, 
-                  y: imgPosition.y
-                }}
+                className="profile-image w-64 h-64 sm:w-80 sm:h-80 xl:w-96 xl:h-96 shadow-2xl rounded-full overflow-hidden relative z-10"
+                whileHover={{ scale: 1.03 }}
                 transition={{ 
                   type: "spring", 
                   stiffness: 150, 
                   damping: 15 
                 }}
-                whileHover={{ scale: 1.03 }}
-                drag
-                dragConstraints={{
-                  top: -20,
-                  left: -20,
-                  right: 20,
-                  bottom: 20,
-                }}
-                dragElastic={0.1}
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-primary animate-gradient-rotation rounded-full opacity-70"></div>
-                <div className="absolute inset-[4px] rounded-full overflow-hidden bg-card interactive-bg">
+                <div className="absolute inset-[4px] rounded-full overflow-hidden bg-card">
                   <img 
-                    src="https://images.unsplash.com/photo-1603575448360-153f093fd0b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                    src={profileImage} 
                     alt="Prashant - Web Developer and UI/UX Designer" 
                     className="w-full h-full object-cover"
                   />
                 </div>
-                
-                {/* Interactive glow effect that follows cursor */}
-                <motion.div 
-                  className="absolute inset-0 bg-gradient-to-r from-primary/30 to-secondary/30 opacity-0 rounded-full"
-                  style={{
-                    background: `radial-gradient(circle closest-side at ${mousePosition.x - 200}px ${mousePosition.y - 200}px, rgba(var(--primary), 0.3), transparent)`,
-                  }}
-                  animate={{ opacity: [0, 0.6, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
-                />
-                
-                {/* Small lights that float around the image */}
-                {[...Array(8)].map((_, i) => (
-                  <motion.div
-                    key={`light-${i}`}
-                    className="absolute w-3 h-3 rounded-full bg-primary/50"
-                    style={{
-                      left: `${Math.random() * 100}%`,
-                      top: `${Math.random() * 100}%`,
-                    }}
-                    animate={{
-                      opacity: [0.2, 0.8, 0.2],
-                      scale: [0.8, 1.2, 0.8],
-                      x: [0, Math.random() * 20 - 10, 0],
-                      y: [0, Math.random() * 20 - 10, 0],
-                    }}
-                    transition={{
-                      duration: 3 + Math.random() * 2,
-                      repeat: Infinity,
-                      delay: i * 0.3,
-                    }}
-                  />
-                ))}
               </motion.div>
               
               {/* Floating badges with enhanced animations */}

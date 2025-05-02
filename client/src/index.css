@@ -56,7 +56,6 @@
 
   body {
     @apply font-inter antialiased bg-background text-foreground;
-    cursor: none; /* Hide default cursor when using custom cursor */
   }
 
   html {
@@ -65,13 +64,6 @@
 
   section {
     scroll-margin-top: 80px;
-  }
-  
-  /* Restore cursor for small devices */
-  @media (max-width: 768px) {
-    body {
-      cursor: auto;
-    }
   }
 }
 
@@ -288,116 +280,13 @@
     }
   }
   
-  /* Custom cursor styles */
-  .cursor {
-    width: 32px;
-    height: 32px;
-    border: 2px solid hsl(var(--primary));
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    mix-blend-mode: difference;
-    transition: transform 0.2s;
-  }
-  
-  .cursor-trail {
-    width: 32px;
-    height: 32px;
-    background: rgba(var(--secondary), 0.2);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9998;
-    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
-  }
-  
-  /* Changed cursor states */
-  .cursor.active {
-    transform: scale(0.5);
-    background: hsl(var(--primary));
-  }
-  
-  .cursor.link-hover {
-    transform: scale(1.5);
-    border-color: hsl(var(--secondary));
-  }
-  
-  .cursor.hidden {
-    transform: scale(0);
-    opacity: 0;
-  }
-  
-  /* Style for hoverable elements */
+  /* Hover style for hoverable elements */
   .hoverable {
-    cursor: none;
     transition: transform 0.3s ease, filter 0.3s ease;
   }
   
   .hoverable:hover {
     transform: scale(1.05);
     filter: brightness(1.1);
-  }
-  
-  /* Mouse interaction effects */
-  .magnetic-effect {
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
-  
-  .glow-on-hover {
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .glow-on-hover::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle closest-side at var(--mouse-x, 50%) var(--mouse-y, 50%), 
-                hsl(var(--primary)/0.3) 0%, 
-                transparent 100%);
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    pointer-events: none;
-    z-index: 2;
-  }
-  
-  .glow-on-hover:hover::after {
-    opacity: 1;
-  }
-  
-  /* Interactive section backgrounds that follow mouse */
-  .interactive-bg {
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .interactive-bg::before {
-    content: '';
-    position: absolute;
-    inset: -100px;
-    background: radial-gradient(
-      circle 400px at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      hsl(var(--primary)/0.15),
-      transparent 40%
-    );
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-    z-index: 0;
-  }
-  
-  .interactive-bg:hover::before {
-    opacity: 1;
-  }
-  
-  /* Hide custom cursor on mobile */
-  @media (max-width: 768px) {
-    .cursor, .cursor-trail {
-      display: none;
-    }
   }
 }
