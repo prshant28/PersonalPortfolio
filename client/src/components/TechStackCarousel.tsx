@@ -24,8 +24,8 @@ const TechStackCarousel = () => {
   ];
 
   return (
-    <div className="py-10 bg-background overflow-hidden max-w-full">
-      <div className="container mx-auto px-6 max-w-full overflow-hidden">
+    <div className="py-10 bg-background overflow-hidden">
+      <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -36,12 +36,12 @@ const TechStackCarousel = () => {
           <h3 className="font-poppins font-semibold text-xl text-primary">Technologies I Work With</h3>
         </motion.div>
         
-        <div className="flex space-x-12 overflow-hidden max-w-full">
-          <div className="tech-stack-carousel flex space-x-16 overflow-hidden">
+        <div className="flex space-x-12 overflow-hidden">
+          <div className="tech-stack-carousel flex space-x-16">
             {techIcons.map((tech, index) => (
               <div 
                 key={index}
-                className="flex items-center justify-center w-20 h-20 bg-card rounded-lg p-4 opacity-80 hover:opacity-100 transition-opacity flex-shrink-0"
+                className="flex items-center justify-center w-20 h-20 bg-card rounded-lg p-4 opacity-80 hover:opacity-100 transition-opacity"
                 title={tech.name}
               >
                 <tech.icon size={42} color={tech.color} />
