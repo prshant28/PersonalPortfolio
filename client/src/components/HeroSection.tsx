@@ -44,7 +44,7 @@ const HeroSection = () => {
     <section 
       id="home" 
       ref={sectionRef}
-      className="min-h-screen flex items-center pt-20 pb-16 px-6 relative overflow-hidden"
+      className="min-h-screen flex items-center pt-20 pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
     >
       {/* Parallax particles background */}
       {particles.map((particle, index) => (
@@ -73,29 +73,29 @@ const HeroSection = () => {
       ))}
       
       {/* Hero background gradients with animation */}
-      <div className="absolute top-20 -left-40 w-[30rem] h-[30rem] rounded-full bg-gradient-to-r from-primary/20 to-primary/5 blur-3xl animate-blob"></div>
-      <div className="absolute top-60 right-10 w-96 h-96 rounded-full bg-gradient-to-l from-secondary/20 to-secondary/5 blur-3xl animate-blob animation-delay-2000"></div>
-      <div className="absolute bottom-20 right-0 left-0 mx-auto w-[40rem] h-60 rounded-full bg-gradient-to-t from-secondary/10 via-primary/10 to-transparent blur-3xl animate-blob animation-delay-4000"></div>
+      <div className="absolute top-20 -left-40 w-[20rem] sm:w-[30rem] h-[20rem] sm:h-[30rem] rounded-full bg-gradient-to-r from-primary/20 to-primary/5 blur-3xl animate-blob"></div>
+      <div className="absolute top-60 right-10 w-64 sm:w-96 h-64 sm:h-96 rounded-full bg-gradient-to-l from-secondary/20 to-secondary/5 blur-3xl animate-blob animation-delay-2000"></div>
+      <div className="absolute bottom-20 right-0 left-0 mx-auto w-[30rem] sm:w-[40rem] h-40 sm:h-60 rounded-full bg-gradient-to-t from-secondary/10 via-primary/10 to-transparent blur-3xl animate-blob animation-delay-4000"></div>
       
       <motion.div 
         className="container mx-auto relative z-10"
         style={{ y, opacity }}
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="order-2 md:order-1"
+            className="order-2 lg:order-1 text-center lg:text-left"
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.8, x: -100 }}
               animate={{ opacity: 1, scale: 1, x: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <span className="font-alegreya uppercase tracking-widest bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-2 block">Portfolio</span>
+              <span className="font-alegreya uppercase tracking-widest bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-2 block text-sm sm:text-base">Portfolio</span>
               <motion.h1 
-                className="font-alegreya font-bold text-4xl sm:text-5xl lg:text-6xl mb-2 tracking-wide uppercase"
+                className="font-alegreya font-bold text-3xl sm:text-4xl lg:text-5xl xl:text-6xl mb-2 tracking-wide uppercase"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.8 }}
@@ -103,7 +103,7 @@ const HeroSection = () => {
                 Hello, It's Me
               </motion.h1>
               <motion.h2 
-                className="font-poppins font-bold text-4xl sm:text-5xl lg:text-6xl mb-4 relative z-10"
+                className="font-poppins font-bold text-3xl sm:text-4xl lg:text-5xl xl:text-6xl mb-4 relative z-10"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.8 }}
@@ -112,17 +112,17 @@ const HeroSection = () => {
                   Prashant
                 </span>
                 <motion.span 
-                  className="absolute -top-8 -right-8 text-secondary text-4xl"
+                  className="absolute -top-6 sm:-top-8 -right-6 sm:-right-8 text-secondary text-2xl sm:text-4xl"
                   initial={{ scale: 0, rotate: -20 }}
                   animate={{ scale: 1, rotate: 0 }}
                   transition={{ delay: 1.5, type: "spring" }}
                 >
-                  <Sparkles size={32} className="animate-pulse" />
+                  <Sparkles size={24} className="sm:w-8 sm:h-8 animate-pulse" />
                 </motion.span>
               </motion.h2>
             </motion.div>
             
-            <p className="text-xl mb-6 text-muted-foreground font-alegreya tracking-wide">
+            <p className="text-lg sm:text-xl mb-6 text-muted-foreground font-alegreya tracking-wide">
               And I'm a <TypingEffect texts={typingTexts} className="text-primary font-medium" />
             </p>
             
@@ -130,7 +130,7 @@ const HeroSection = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1, duration: 0.8 }}
-              className="mb-8 text-muted-foreground max-w-lg"
+              className="mb-8 text-muted-foreground max-w-lg mx-auto lg:mx-0 font-poppins text-sm sm:text-base"
             >
               Passionate about creating beautiful and functional web experiences with attention to detail and focus on user experience. Let's build something amazing together!
             </motion.p>
@@ -140,15 +140,15 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.2, duration: 0.8 }}
-              className="mb-8 bg-card/20 backdrop-blur-sm p-4 rounded-lg border border-primary/10"
+              className="mb-8 bg-card/20 backdrop-blur-sm p-3 sm:p-4 rounded-lg border border-primary/10"
             >
-              <h3 className="text-sm font-medium text-secondary mb-2">Web Developer & UI/UX Designer in India</h3>
-              <p className="text-xs text-muted-foreground">
+              <h3 className="text-xs sm:text-sm font-medium text-secondary mb-2">Web Developer & UI/UX Designer in India</h3>
+              <p className="text-xs text-muted-foreground font-poppins">
                 Specializing in React, Next.js, Node.js and modern web technologies. Creating beautiful, responsive and 
                 user-friendly websites with focus on performance and accessibility. Offering comprehensive web development 
                 services including e-commerce solutions, portfolio websites, and business applications.
               </p>
-              <div className="mt-2 grid grid-cols-2 gap-1 text-xs">
+              <div className="mt-2 grid grid-cols-2 gap-1 text-xs font-poppins">
                 <div>• React/Next.js Expert</div>
                 <div>• UI/UX Designer</div>
                 <div>• Responsive Web Design</div>
@@ -157,7 +157,7 @@ const HeroSection = () => {
             </motion.div>
             
             {/* Social Icons with improved animations */}
-            <div className="flex gap-6 mb-10">
+            <div className="flex gap-4 sm:gap-6 mb-8 sm:mb-10 justify-center lg:justify-start">
               {[
                 { icon: Github, label: "GitHub", color: "bg-[#333]/10 hover:bg-[#333]/20" },
                 { icon: Linkedin, label: "LinkedIn", color: "bg-[#0077b5]/10 hover:bg-[#0077b5]/20" },
@@ -166,14 +166,14 @@ const HeroSection = () => {
                 <motion.a 
                   key={social.label}
                   href="#" 
-                  className={`w-12 h-12 rounded-full ${social.color} flex items-center justify-center backdrop-blur-sm relative group overflow-hidden z-10`}
+                  className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full ${social.color} flex items-center justify-center backdrop-blur-sm relative group overflow-hidden z-10`}
                   whileHover={{ y: -8 }}
                   transition={{ type: "spring", stiffness: 500, delay: index * 0.05 }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   aria-label={social.label}
                 >
-                  <social.icon size={20} className="relative z-10 text-foreground group-hover:text-primary transition-colors" />
+                  <social.icon size={18} className="sm:w-5 sm:h-5 relative z-10 text-foreground group-hover:text-primary transition-colors" />
                   <motion.div 
                     className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity"
                     initial={{ scale: 0 }}
@@ -186,19 +186,19 @@ const HeroSection = () => {
             
             {/* CTA Buttons with improved design */}
             <motion.div 
-              className="flex flex-wrap gap-4"
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
             >
-              <Button size="lg" className="gap-2 rounded-full px-8 font-medium relative overflow-hidden group">
+              <Button size="lg" className="gap-2 rounded-full px-6 sm:px-8 font-medium relative overflow-hidden group w-full sm:w-auto">
                 <span className="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-80 group-hover:opacity-100 transition-opacity"></span>
                 <span className="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-primary bg-size-200 animate-gradient-x opacity-0 group-hover:opacity-100"></span>
                 <span className="relative z-10 flex items-center gap-2">
                   <Download size={18} /> Download CV
                 </span>
               </Button>
-              <Button size="lg" variant="outline" className="gap-2 rounded-full px-8 font-medium border-2 border-primary/50 hover:border-primary relative overflow-hidden group" asChild>
+              <Button size="lg" variant="outline" className="gap-2 rounded-full px-6 sm:px-8 font-medium border-2 border-primary/50 hover:border-primary relative overflow-hidden group w-full sm:w-auto" asChild>
                 <a href="#projects">
                   <span className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10 opacity-0 group-hover:opacity-100 transition-opacity"></span>
                   <span className="relative z-10 flex items-center gap-2">
@@ -213,18 +213,18 @@ const HeroSection = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
-            className="flex justify-center md:justify-end order-1 md:order-2"
+            className="flex justify-center order-1 lg:order-2"
           >
             <div className="relative">
               {/* Rotating circles around profile */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <motion.div 
-                  className="w-[calc(100%+3rem)] h-[calc(100%+3rem)] rounded-full border-2 border-dashed border-primary/20 absolute"
+                  className="w-[calc(100%+2rem)] sm:w-[calc(100%+3rem)] h-[calc(100%+2rem)] sm:h-[calc(100%+3rem)] rounded-full border-2 border-dashed border-primary/20 absolute"
                   animate={{ rotate: 360 }}
                   transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
                 />
                 <motion.div 
-                  className="w-[calc(100%+6rem)] h-[calc(100%+6rem)] rounded-full border-2 border-dashed border-secondary/20 absolute"
+                  className="w-[calc(100%+4rem)] sm:w-[calc(100%+6rem)] h-[calc(100%+4rem)] sm:h-[calc(100%+6rem)] rounded-full border-2 border-dashed border-secondary/20 absolute"
                   animate={{ rotate: -360 }}
                   transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
                 />
@@ -232,19 +232,19 @@ const HeroSection = () => {
               
               {/* Floating elements */}
               {[
-                { icon: Star, position: "top-0 left-10", delay: 0, color: "text-primary" },
-                { icon: Trophy, position: "bottom-20 -left-10", delay: 0.2, color: "text-secondary" },
-                { icon: Sparkles, position: "top-20 -right-10", delay: 0.4, color: "text-primary" },
-                { icon: RefreshCw, position: "bottom-0 right-10", delay: 0.6, color: "text-secondary" }
+                { icon: Star, position: "top-0 left-6 sm:left-10", delay: 0, color: "text-primary" },
+                { icon: Trophy, position: "bottom-16 sm:bottom-20 -left-6 sm:-left-10", delay: 0.2, color: "text-secondary" },
+                { icon: Sparkles, position: "top-16 sm:top-20 -right-6 sm:-right-10", delay: 0.4, color: "text-primary" },
+                { icon: RefreshCw, position: "bottom-0 right-6 sm:right-10", delay: 0.6, color: "text-secondary" }
               ].map((item, index) => (
                 <motion.div
                   key={index}
-                  className={`absolute ${item.position} z-10 bg-card/80 backdrop-blur-sm p-2 rounded-full shadow-lg border border-primary/20`}
+                  className={`absolute ${item.position} z-10 bg-card/80 backdrop-blur-sm p-1.5 sm:p-2 rounded-full shadow-lg border border-primary/20`}
                   initial={{ opacity: 0, scale: 0 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 1 + item.delay, type: "spring" }}
                 >
-                  <item.icon className={item.color} size={20} />
+                  <item.icon className={item.color} size={16} />
                 </motion.div>
               ))}
 
@@ -264,7 +264,7 @@ const HeroSection = () => {
               
               {/* Profile image with simple border */}
               <motion.div 
-                className="profile-image w-64 h-64 sm:w-80 sm:h-80 xl:w-96 xl:h-96 shadow-2xl rounded-full overflow-hidden relative z-10"
+                className="profile-image w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 xl:w-96 xl:h-96 shadow-2xl rounded-full overflow-hidden relative z-10"
                 whileHover={{ scale: 1.03 }}
                 transition={{ 
                   type: "spring", 
@@ -284,7 +284,7 @@ const HeroSection = () => {
               
               {/* Floating badges with enhanced animations */}
               <motion.div 
-                className="absolute top-5 -left-10 bg-card/90 backdrop-blur-md p-3 rounded-xl shadow-lg flex items-center gap-2 border border-primary/20 overflow-hidden"
+                className="absolute top-3 sm:top-5 -left-6 sm:-left-10 bg-card/90 backdrop-blur-md p-2 sm:p-3 rounded-xl shadow-lg flex items-center gap-1 sm:gap-2 border border-primary/20 overflow-hidden"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.5, duration: 0.5 }}
@@ -293,8 +293,8 @@ const HeroSection = () => {
                   boxShadow: "0 10px 30px -10px rgba(var(--primary), 0.3)" 
                 }}
               >
-                <div className="text-primary font-semibold">5+</div>
-                <div className="text-sm">Years Experience</div>
+                <div className="text-primary font-semibold text-sm sm:text-base">5+</div>
+                <div className="text-xs sm:text-sm font-poppins">Years Experience</div>
                 <motion.div 
                   className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10"
                   initial={{ x: "-100%" }}
@@ -304,7 +304,7 @@ const HeroSection = () => {
               </motion.div>
               
               <motion.div 
-                className="absolute bottom-10 -right-5 bg-card/90 backdrop-blur-md p-3 rounded-xl shadow-lg flex items-center gap-2 border border-secondary/20 overflow-hidden"
+                className="absolute bottom-6 sm:bottom-10 -right-3 sm:-right-5 bg-card/90 backdrop-blur-md p-2 sm:p-3 rounded-xl shadow-lg flex items-center gap-1 sm:gap-2 border border-secondary/20 overflow-hidden"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.8, duration: 0.5 }}
@@ -313,8 +313,8 @@ const HeroSection = () => {
                   boxShadow: "0 10px 30px -10px rgba(var(--secondary), 0.3)" 
                 }}
               >
-                <div className="text-secondary font-semibold">40+</div>
-                <div className="text-sm">Projects Completed</div>
+                <div className="text-secondary font-semibold text-sm sm:text-base">40+</div>
+                <div className="text-xs sm:text-sm font-poppins">Projects Completed</div>
                 <motion.div 
                   className="absolute inset-0 bg-gradient-to-r from-secondary/10 to-primary/10"
                   initial={{ x: "-100%" }}
@@ -331,12 +331,12 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 0.8 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-16 sm:mt-20"
         >
           {features.map((feature, index) => (
             <motion.div
               key={index}
-              className="bg-card/30 backdrop-blur-md p-6 rounded-xl border border-muted group relative overflow-hidden"
+              className="bg-card/30 backdrop-blur-md p-4 sm:p-6 rounded-xl border border-muted group relative overflow-hidden"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.2 + index * 0.2, duration: 0.6 }}
@@ -355,18 +355,18 @@ const HeroSection = () => {
               />
               
               <motion.div 
-                className={`w-12 h-12 rounded-full ${index % 2 === 0 ? 'bg-primary/10' : 'bg-secondary/10'} flex items-center justify-center mb-4 group-hover:scale-110 transition-all duration-300 relative z-10`}
+                className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full ${index % 2 === 0 ? 'bg-primary/10' : 'bg-secondary/10'} flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition-all duration-300 relative z-10`}
                 whileHover={{ rotate: [0, -10, 10, -10, 0] }}
                 transition={{ duration: 0.5 }}
               >
-                <feature.icon className={index % 2 === 0 ? 'text-primary' : 'text-secondary'} size={22} />
+                <feature.icon className={index % 2 === 0 ? 'text-primary' : 'text-secondary'} size={20} />
               </motion.div>
               
-              <h3 className="font-alegreya text-xl font-semibold mb-2 relative z-10">{feature.title}</h3>
-              <p className="text-muted-foreground text-sm relative z-10">{feature.description}</p>
+              <h3 className="font-alegreya text-lg sm:text-xl font-semibold mb-2 relative z-10">{feature.title}</h3>
+              <p className="text-muted-foreground text-xs sm:text-sm relative z-10 font-poppins">{feature.description}</p>
               
               <motion.div 
-                className="absolute bottom-0 right-0 w-20 h-20 opacity-10"
+                className="absolute bottom-0 right-0 w-16 h-16 sm:w-20 sm:h-20 opacity-10"
                 initial={{ rotate: 0 }}
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}

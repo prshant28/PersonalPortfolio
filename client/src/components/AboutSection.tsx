@@ -31,23 +31,23 @@ const AboutSection = () => {
   ];
 
   return (
-    <section id="about" className="py-20 px-6 bg-muted/50">
+    <section id="about" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-muted/50">
       <div className="container mx-auto">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-primary text-lg font-medium mb-2">ABOUT ME</h2>
-          <h3 className="font-poppins font-bold text-3xl sm:text-4xl mb-4">My Journey</h3>
-          <p className="max-w-2xl mx-auto text-muted-foreground">
+          <h2 className="text-primary text-sm sm:text-lg font-medium mb-2">ABOUT ME</h2>
+          <h3 className="font-poppins font-bold text-2xl sm:text-3xl lg:text-4xl mb-4">My Journey</h3>
+          <p className="max-w-2xl mx-auto text-muted-foreground font-poppins text-sm sm:text-base">
             Learn more about my professional journey, experience, and what drives my passion for web development.
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -55,30 +55,30 @@ const AboutSection = () => {
             transition={{ duration: 0.6 }}
             className="order-2 lg:order-1"
           >
-            <h4 className="font-poppins font-semibold text-2xl mb-4">UI/UX Designer & Full Stack Developer</h4>
-            <p className="text-foreground mb-4">
+            <h4 className="font-poppins font-semibold text-xl sm:text-2xl mb-4">UI/UX Designer & Full Stack Developer</h4>
+            <p className="text-foreground mb-4 font-poppins text-sm sm:text-base">
               Hello! I'm Prashant, a passionate UI/UX Designer and Full Stack Developer with 5+ years of experience creating beautiful and functional web experiences.
             </p>
-            <p className="text-muted-foreground mb-6">
+            <p className="text-muted-foreground mb-6 font-poppins text-sm sm:text-base">
               My journey in web development started during my university years when I discovered my passion for creating user-centric digital experiences. I've since worked with startups, agencies, and established companies to build products that users love.
             </p>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
               {services.map((service, index) => (
                 <div key={index} className="flex items-center">
-                  <CheckCircle size={18} className="text-primary mr-3 flex-shrink-0" />
-                  <span>{service}</span>
+                  <CheckCircle size={16} className="text-primary mr-2 sm:mr-3 flex-shrink-0" />
+                  <span className="text-sm sm:text-base font-poppins">{service}</span>
                 </div>
               ))}
             </div>
             
-            <div className="flex flex-wrap gap-4">
-              <Button asChild size="lg" className="gap-2">
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button asChild size="lg" className="gap-2 w-full sm:w-auto">
                 <a href="#contact">
                   Get In Touch
                 </a>
               </Button>
-              <Button variant="outline" size="lg" className="gap-2">
+              <Button variant="outline" size="lg" className="gap-2 w-full sm:w-auto">
                 <Download size={18} /> Download Resume
               </Button>
             </div>
@@ -91,22 +91,22 @@ const AboutSection = () => {
             transition={{ duration: 0.6 }}
             className="order-1 lg:order-2 flex justify-center"
           >
-            <div className="w-full max-w-md bg-card rounded-xl overflow-hidden shadow-xl">
+            <div className="w-full max-w-sm sm:max-w-md bg-card rounded-xl overflow-hidden shadow-xl">
               <img 
                 src="https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
                 alt="Prashant working" 
-                className="w-full h-72 object-cover"
+                className="w-full h-60 sm:h-72 object-cover"
               />
-              <div className="p-6">
-                <h5 className="font-poppins font-semibold text-xl mb-4">Professional Experience</h5>
+              <div className="p-4 sm:p-6">
+                <h5 className="font-poppins font-semibold text-lg sm:text-xl mb-4">Professional Experience</h5>
                 
                 {experiences.map((exp, index) => (
-                  <div key={index} className="mb-4 last:mb-0">
-                    <div className="flex justify-between text-sm text-muted-foreground mb-1">
-                      <span>{exp.title}</span>
-                      <span>{exp.period}</span>
+                  <div key={index} className="mb-3 sm:mb-4 last:mb-0">
+                    <div className="flex flex-col sm:flex-row sm:justify-between text-xs sm:text-sm text-muted-foreground mb-1">
+                      <span className="font-medium">{exp.title}</span>
+                      <span className="text-xs">{exp.period}</span>
                     </div>
-                    <p className="text-foreground">{exp.company}</p>
+                    <p className="text-foreground text-sm sm:text-base font-poppins">{exp.company}</p>
                   </div>
                 ))}
               </div>

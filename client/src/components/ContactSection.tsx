@@ -75,75 +75,75 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-20 px-6 bg-muted/50">
+    <section id="contact" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-muted/50">
       <div className="container mx-auto">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-primary text-lg font-medium mb-2">GET IN TOUCH</h2>
-          <h3 className="font-poppins font-bold text-3xl sm:text-4xl mb-4">Let's Work Together</h3>
-          <p className="max-w-2xl mx-auto text-muted-foreground">
+          <h2 className="text-primary text-sm sm:text-lg font-medium mb-2">GET IN TOUCH</h2>
+          <h3 className="font-poppins font-bold text-2xl sm:text-3xl lg:text-4xl mb-4">Let's Work Together</h3>
+          <p className="max-w-2xl mx-auto text-muted-foreground font-poppins text-sm sm:text-base">
             Have a project in mind or want to discuss potential opportunities? Feel free to reach out!
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="bg-card rounded-xl p-8 h-full">
-              <h4 className="font-poppins font-semibold text-2xl mb-6">Contact Information</h4>
+            <div className="bg-card rounded-xl p-6 sm:p-8 h-full">
+              <h4 className="font-poppins font-semibold text-xl sm:text-2xl mb-6">Contact Information</h4>
               
-              <div className="flex items-start mb-8">
-                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mr-4 flex-shrink-0">
-                  <Mail className="text-primary" />
+              <div className="flex items-start mb-6 sm:mb-8">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/20 flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
+                  <Mail className="text-primary" size={18} />
                 </div>
                 <div>
-                  <h5 className="text-lg font-medium mb-1">Email</h5>
-                  <p className="text-muted-foreground">hello@prashant.dev</p>
+                  <h5 className="text-base sm:text-lg font-medium mb-1">Email</h5>
+                  <p className="text-muted-foreground font-poppins text-sm sm:text-base">hello@prashant.dev</p>
                 </div>
               </div>
               
-              <div className="flex items-start mb-8">
-                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mr-4 flex-shrink-0">
-                  <Phone className="text-primary" />
+              <div className="flex items-start mb-6 sm:mb-8">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/20 flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
+                  <Phone className="text-primary" size={18} />
                 </div>
                 <div>
-                  <h5 className="text-lg font-medium mb-1">Phone</h5>
-                  <p className="text-muted-foreground">+1 (555) 123-4567</p>
+                  <h5 className="text-base sm:text-lg font-medium mb-1">Phone</h5>
+                  <p className="text-muted-foreground font-poppins text-sm sm:text-base">+1 (555) 123-4567</p>
                 </div>
               </div>
               
-              <div className="flex items-start mb-8">
-                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mr-4 flex-shrink-0">
-                  <MapPin className="text-primary" />
+              <div className="flex items-start mb-6 sm:mb-8">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/20 flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
+                  <MapPin className="text-primary" size={18} />
                 </div>
                 <div>
-                  <h5 className="text-lg font-medium mb-1">Location</h5>
-                  <p className="text-muted-foreground">San Francisco, California</p>
+                  <h5 className="text-base sm:text-lg font-medium mb-1">Location</h5>
+                  <p className="text-muted-foreground font-poppins text-sm sm:text-base">San Francisco, California</p>
                 </div>
               </div>
               
-              <h4 className="font-poppins font-semibold text-xl mb-4">Connect With Me</h4>
-              <div className="flex gap-4">
-                <a href="#" className="w-10 h-10 rounded-full bg-muted flex items-center justify-center social-icon">
-                  <Github size={18} />
+              <h4 className="font-poppins font-semibold text-lg sm:text-xl mb-4">Connect With Me</h4>
+              <div className="flex gap-3 sm:gap-4">
+                <a href="#" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-muted flex items-center justify-center social-icon">
+                  <Github size={16} />
                 </a>
-                <a href="#" className="w-10 h-10 rounded-full bg-muted flex items-center justify-center social-icon">
-                  <Linkedin size={18} />
+                <a href="#" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-muted flex items-center justify-center social-icon">
+                  <Linkedin size={16} />
                 </a>
-                <a href="#" className="w-10 h-10 rounded-full bg-muted flex items-center justify-center social-icon">
-                  <Twitter size={18} />
+                <a href="#" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-muted flex items-center justify-center social-icon">
+                  <Twitter size={16} />
                 </a>
-                <a href="#" className="w-10 h-10 rounded-full bg-muted flex items-center justify-center social-icon">
-                  <Dribbble size={18} />
+                <a href="#" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-muted flex items-center justify-center social-icon">
+                  <Dribbble size={16} />
                 </a>
               </div>
             </div>
@@ -155,8 +155,8 @@ const ContactSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="bg-card rounded-xl p-8">
-              <h4 className="font-poppins font-semibold text-2xl mb-6">Send Me a Message</h4>
+            <div className="bg-card rounded-xl p-6 sm:p-8">
+              <h4 className="font-poppins font-semibold text-xl sm:text-2xl mb-6">Send Me a Message</h4>
               
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -166,12 +166,12 @@ const ContactSection = () => {
                       name="name"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Your Name</FormLabel>
+                          <FormLabel className="font-poppins">Your Name</FormLabel>
                           <FormControl>
                             <Input 
                               placeholder="John Doe" 
                               {...field} 
-                              className="bg-muted border-muted focus-visible:ring-primary"
+                              className="bg-muted border-muted focus-visible:ring-primary font-poppins"
                             />
                           </FormControl>
                           <FormMessage />
@@ -184,13 +184,13 @@ const ContactSection = () => {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Your Email</FormLabel>
+                          <FormLabel className="font-poppins">Your Email</FormLabel>
                           <FormControl>
                             <Input 
                               placeholder="john@example.com" 
                               type="email"
                               {...field} 
-                              className="bg-muted border-muted focus-visible:ring-primary"
+                              className="bg-muted border-muted focus-visible:ring-primary font-poppins"
                             />
                           </FormControl>
                           <FormMessage />
@@ -204,12 +204,12 @@ const ContactSection = () => {
                     name="subject"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Subject</FormLabel>
+                        <FormLabel className="font-poppins">Subject</FormLabel>
                         <FormControl>
                           <Input 
                             placeholder="Project Inquiry" 
                             {...field} 
-                            className="bg-muted border-muted focus-visible:ring-primary"
+                            className="bg-muted border-muted focus-visible:ring-primary font-poppins"
                           />
                         </FormControl>
                         <FormMessage />
@@ -222,13 +222,13 @@ const ContactSection = () => {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Your Message</FormLabel>
+                        <FormLabel className="font-poppins">Your Message</FormLabel>
                         <FormControl>
                           <Textarea 
                             placeholder="Hello, I'd like to discuss a potential project..." 
                             rows={5}
                             {...field} 
-                            className="bg-muted border-muted focus-visible:ring-primary resize-none"
+                            className="bg-muted border-muted focus-visible:ring-primary resize-none font-poppins"
                           />
                         </FormControl>
                         <FormMessage />

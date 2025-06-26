@@ -18,10 +18,10 @@ const ProjectsSection = () => {
     : projects.filter(project => project.category.toLowerCase() === filter);
 
   return (
-    <section id="projects" className="py-20 px-6 bg-muted/5 relative overflow-hidden">
+    <section id="projects" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-muted/5 relative overflow-hidden">
       {/* Background decorative elements */}
-      <div className="absolute top-40 right-0 w-96 h-96 rounded-full bg-primary/5 filter blur-3xl -z-10"></div>
-      <div className="absolute bottom-20 left-0 w-96 h-96 rounded-full bg-primary/5 filter blur-3xl -z-10"></div>
+      <div className="absolute top-40 right-0 w-64 sm:w-96 h-64 sm:h-96 rounded-full bg-primary/5 filter blur-3xl -z-10"></div>
+      <div className="absolute bottom-20 left-0 w-64 sm:w-96 h-64 sm:h-96 rounded-full bg-primary/5 filter blur-3xl -z-10"></div>
       
       <div className="container mx-auto">
         <motion.div 
@@ -31,9 +31,9 @@ const ProjectsSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <span className="text-primary font-alegreya text-lg uppercase tracking-widest mb-2 inline-block">Portfolio</span>
-          <h2 className="font-alegreya font-bold text-3xl sm:text-5xl mb-4 tracking-wide uppercase">Featured Projects</h2>
-          <p className="max-w-2xl mx-auto text-muted-foreground">
+          <span className="text-primary font-alegreya text-sm sm:text-lg uppercase tracking-widest mb-2 inline-block">Portfolio</span>
+          <h2 className="font-alegreya font-bold text-2xl sm:text-3xl lg:text-4xl xl:text-5xl mb-4 tracking-wide uppercase">Featured Projects</h2>
+          <p className="max-w-2xl mx-auto text-muted-foreground font-poppins text-sm sm:text-base">
             Here are some of my recent works that showcase my skills and expertise in UI/UX design and development.
           </p>
         </motion.div>
@@ -44,7 +44,7 @@ const ProjectsSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="flex flex-wrap justify-center gap-3 mb-12"
+          className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-12"
         >
           {categories.map((category) => (
             <Button
@@ -52,7 +52,7 @@ const ProjectsSection = () => {
               variant={filter === category ? "default" : "outline"}
               size="sm"
               onClick={() => setFilter(category)}
-              className={`rounded-full font-alegreya uppercase text-xs tracking-wider px-6 ${
+              className={`rounded-full font-alegreya uppercase text-xs tracking-wider px-4 sm:px-6 ${
                 filter === category 
                   ? "bg-primary shadow-lg shadow-primary/20" 
                   : "hover:bg-primary/10 hover:text-primary border-primary/20"
@@ -65,7 +65,7 @@ const ProjectsSection = () => {
         </motion.div>
         
         {/* Projects grid with staggered animation */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           <AnimatePresence mode="wait">
             {filteredProjects.map((project, index) => (
               <motion.div 
@@ -86,7 +86,7 @@ const ProjectsSection = () => {
                   transition={{ type: "spring", stiffness: 300 }}
                 >
                   {/* Card Header with Image */}
-                  <div className="relative h-56 overflow-hidden">
+                  <div className="relative h-48 sm:h-56 overflow-hidden">
                     {/* Overlay gradient */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent z-10 opacity-60 group-hover:opacity-80 transition-opacity"></div>
                     
@@ -99,7 +99,7 @@ const ProjectsSection = () => {
                     
                     {/* Category badge */}
                     <div className="absolute top-4 left-4 z-20">
-                      <Badge className="bg-primary/90 hover:bg-primary text-white font-alegreya uppercase tracking-wide py-1 px-3">
+                      <Badge className="bg-primary/90 hover:bg-primary text-white font-alegreya uppercase tracking-wide py-1 px-3 text-xs">
                         {project.category}
                       </Badge>
                     </div>
@@ -110,7 +110,7 @@ const ProjectsSection = () => {
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-9 h-9 rounded-full bg-white/90 hover:bg-primary hover:text-white flex items-center justify-center transition-colors"
+                        className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/90 hover:bg-primary hover:text-white flex items-center justify-center transition-colors"
                         aria-label="View live site"
                       >
                         <ExternalLink size={14} />
@@ -119,7 +119,7 @@ const ProjectsSection = () => {
                         href={project.sourceUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-9 h-9 rounded-full bg-white/90 hover:bg-primary hover:text-white flex items-center justify-center transition-colors"
+                        className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/90 hover:bg-primary hover:text-white flex items-center justify-center transition-colors"
                         aria-label="View source code"
                       >
                         <Code size={14} />
@@ -128,15 +128,15 @@ const ProjectsSection = () => {
                   </div>
                   
                   {/* Card Content */}
-                  <div className="p-6">
+                  <div className="p-4 sm:p-6">
                     {/* Project title with animated underline on hover */}
-                    <h3 className="font-alegreya font-bold text-xl mb-2 relative inline-block group-hover:text-primary transition-colors">
+                    <h3 className="font-alegreya font-bold text-lg sm:text-xl mb-2 relative inline-block group-hover:text-primary transition-colors">
                       {project.title}
                       <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
                     </h3>
                     
                     {/* Project description */}
-                    <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
+                    <p className="text-muted-foreground text-sm mb-4 line-clamp-2 font-poppins">
                       {project.description}
                     </p>
                     
@@ -157,7 +157,7 @@ const ProjectsSection = () => {
                     <div className="pt-2 border-t border-muted">
                       <a 
                         href="#" 
-                        className="text-primary hover:text-primary/80 transition-colors flex items-center gap-1 text-sm font-medium group/link"
+                        className="text-primary hover:text-primary/80 transition-colors flex items-center gap-1 text-sm font-medium group/link font-poppins"
                       >
                         <span>View Project Details</span>
                         <ArrowRight size={14} className="transition-transform duration-300 group-hover/link:translate-x-1" />
@@ -187,11 +187,11 @@ const ProjectsSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="flex justify-center mt-16"
+          className="flex justify-center mt-12 sm:mt-16"
         >
           <Button 
             size="lg" 
-            className="gap-2 rounded-full px-8 font-medium shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-shadow group"
+            className="gap-2 rounded-full px-6 sm:px-8 font-medium shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-shadow group"
           >
             View All Projects 
             <span className="relative transition-all duration-300 group-hover:translate-x-1">

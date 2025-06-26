@@ -69,6 +69,15 @@
   section {
     scroll-margin-top: 80px;
   }
+
+  /* Use Poppins for all description text */
+  .description-text {
+    @apply font-poppins;
+  }
+
+  p, .text-muted-foreground {
+    @apply font-poppins;
+  }
 }
 
 @layer components {
@@ -207,7 +216,7 @@
   }
   
   .timeline-content {
-    @apply relative w-[calc(50%-40px)] p-6 rounded-lg bg-card/80 backdrop-blur-sm border border-border shadow-lg transition-all duration-300;
+    @apply relative w-[calc(50%-40px)] p-4 sm:p-6 rounded-lg bg-card/80 backdrop-blur-sm border border-border shadow-lg transition-all duration-300;
     &:hover {
       @apply shadow-xl transform scale-105;
       border-color: hsl(var(--primary)/0.5);
@@ -234,18 +243,19 @@
   }
   
   .timeline-date {
-    @apply inline-block px-3 py-1 mb-2 text-xs rounded-full bg-gradient-to-r from-primary/30 to-secondary/30 backdrop-blur-sm text-primary-foreground font-medium;
+    @apply inline-block px-2 sm:px-3 py-1 mb-2 text-xs rounded-full bg-gradient-to-r from-primary/30 to-secondary/30 backdrop-blur-sm text-primary-foreground font-medium;
     box-shadow: 0 2px 10px -2px rgba(var(--primary), 0.2);
   }
   
   .timeline-title {
-    @apply text-xl font-bold mb-2 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+    @apply text-lg sm:text-xl font-bold mb-2 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
   }
   
   .timeline-description {
-    @apply text-sm text-muted-foreground;
+    @apply text-sm text-muted-foreground font-poppins;
   }
   
+  /* Mobile responsive timeline */
   @media (max-width: 768px) {
     .timeline-container::after {
       @apply left-6;
@@ -292,5 +302,43 @@
   .hoverable:hover {
     transform: scale(1.05);
     filter: brightness(1.1);
+  }
+
+  /* Responsive utilities */
+  .container-responsive {
+    @apply px-4 sm:px-6 lg:px-8 xl:px-12;
+  }
+
+  .text-responsive {
+    @apply text-sm sm:text-base lg:text-lg;
+  }
+
+  .heading-responsive {
+    @apply text-2xl sm:text-3xl lg:text-4xl xl:text-5xl;
+  }
+
+  .grid-responsive {
+    @apply grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
+  }
+}
+
+/* Additional responsive breakpoints */
+@media (max-width: 480px) {
+  .timeline-content {
+    @apply p-3;
+  }
+  
+  .timeline-title {
+    @apply text-base;
+  }
+  
+  .timeline-description {
+    @apply text-xs;
+  }
+}
+
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1400px;
   }
 }
