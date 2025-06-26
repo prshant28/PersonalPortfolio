@@ -44,7 +44,7 @@ const HeroSection = () => {
     <section 
       id="home" 
       ref={sectionRef}
-      className="min-h-screen flex items-center pt-20 pb-16 px-6 relative overflow-hidden"
+      className="min-h-screen flex items-center pt-20 pb-16 px-6 relative overflow-hidden max-w-full"
     >
       {/* Parallax particles background */}
       {particles.map((particle, index) => (
@@ -54,9 +54,9 @@ const HeroSection = () => {
           style={{
             width: particle.size,
             height: particle.size,
-            left: `${particle.x}%`,
+            left: `${Math.min(particle.x, 95)}%`,
             top: `${particle.y}%`,
-            x: useTransform(scrollYProgress, [0, 1], [0, particle.x > 50 ? -100 : 100]),
+            x: useTransform(scrollYProgress, [0, 1], [0, particle.x > 50 ? -50 : 50]),
           }}
           initial={{ opacity: 0 }}
           animate={{ 
@@ -72,30 +72,31 @@ const HeroSection = () => {
         />
       ))}
       
-      {/* Hero background gradients with animation */}
-      <div className="absolute top-20 -left-40 w-[30rem] h-[30rem] rounded-full bg-gradient-to-r from-primary/20 to-primary/5 blur-3xl animate-blob"></div>
-      <div className="absolute top-60 right-10 w-96 h-96 rounded-full bg-gradient-to-l from-secondary/20 to-secondary/5 blur-3xl animate-blob animation-delay-2000"></div>
-      <div className="absolute bottom-20 right-0 left-0 mx-auto w-[40rem] h-60 rounded-full bg-gradient-to-t from-secondary/10 via-primary/10 to-transparent blur-3xl animate-blob animation-delay-4000"></div>
+      {/* Hero background gradients with animation - constrained to viewport */}
+      <div className="absolute top-20 -left-20 w-[20rem] h-[20rem] rounded-full bg-gradient-to-r from-primary/20 to-primary/5 blur-3xl animate-blob max-w-[50vw]"></div>
+      <div className="absolute top-60 right-5 w-80 h-80 rounded-full bg-gradient-to-l from-secondary/20 to-secondary/5 blur-3xl animate-blob animation-delay-2000 max-w-[40vw]"></div>
+      <div className="absolute bottom-20 right-0 left-0 mx-auto w-[30rem] h-60 rounded-full bg-gradient-to-t from-secondary/10 via-primary/10 to-transparent blur-3xl animate-blob animation-delay-4000 max-w-[60vw]"></div>
       
       <motion.div 
-        className="container mx-auto relative z-10"
+        className="container mx-auto relative z-10 max-w-full overflow-hidden"
         style={{ y, opacity }}
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center max-w-full">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="order-2 md:order-1"
+            className="order-2 md:order-1 max-w-full overflow-hidden"
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.8, x: -100 }}
               animate={{ opacity: 1, scale: 1, x: 0 }}
               transition={{ duration: 0.6 }}
+              className="max-w-full"
             >
               <span className="font-alegreya uppercase tracking-widest bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-2 block">Portfolio</span>
               <motion.h1 
-                className="font-alegreya font-bold text-4xl sm:text-5xl lg:text-6xl mb-2 tracking-wide uppercase"
+                className="font-alegreya font-bold text-4xl sm:text-5xl lg:text-6xl mb-2 tracking-wide uppercase break-words"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.8 }}
@@ -103,7 +104,7 @@ const HeroSection = () => {
                 Hello, It's Me
               </motion.h1>
               <motion.h2 
-                className="font-poppins font-bold text-4xl sm:text-5xl lg:text-6xl mb-4 relative z-10"
+                className="font-poppins font-bold text-4xl sm:text-5xl lg:text-6xl mb-4 relative z-10 break-words"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.8 }}
@@ -122,7 +123,7 @@ const HeroSection = () => {
               </motion.h2>
             </motion.div>
             
-            <p className="text-xl mb-6 text-muted-foreground font-alegreya tracking-wide">
+            <p className="text-xl mb-6 text-muted-foreground font-alegreya tracking-wide break-words">
               And I'm a <TypingEffect texts={typingTexts} className="text-primary font-medium" />
             </p>
             
@@ -130,7 +131,7 @@ const HeroSection = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1, duration: 0.8 }}
-              className="mb-8 text-muted-foreground max-w-lg"
+              className="mb-8 text-muted-foreground max-w-lg break-words"
             >
               Passionate about creating beautiful and functional web experiences with attention to detail and focus on user experience. Let's build something amazing together!
             </motion.p>
@@ -140,10 +141,10 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.2, duration: 0.8 }}
-              className="mb-8 bg-card/20 backdrop-blur-sm p-4 rounded-lg border border-primary/10"
+              className="mb-8 bg-card/20 backdrop-blur-sm p-4 rounded-lg border border-primary/10 max-w-full overflow-hidden"
             >
               <h3 className="text-sm font-medium text-secondary mb-2">Web Developer & UI/UX Designer in India</h3>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-muted-foreground break-words">
                 Specializing in React, Next.js, Node.js and modern web technologies. Creating beautiful, responsive and 
                 user-friendly websites with focus on performance and accessibility. Offering comprehensive web development 
                 services including e-commerce solutions, portfolio websites, and business applications.
@@ -157,7 +158,7 @@ const HeroSection = () => {
             </motion.div>
             
             {/* Social Icons with improved animations */}
-            <div className="flex gap-6 mb-10">
+            <div className="flex gap-6 mb-10 flex-wrap">
               {[
                 { icon: Github, label: "GitHub", color: "bg-[#333]/10 hover:bg-[#333]/20" },
                 { icon: Linkedin, label: "LinkedIn", color: "bg-[#0077b5]/10 hover:bg-[#0077b5]/20" },
@@ -213,9 +214,9 @@ const HeroSection = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
-            className="flex justify-center md:justify-end order-1 md:order-2"
+            className="flex justify-center md:justify-end order-1 md:order-2 max-w-full overflow-hidden"
           >
-            <div className="relative">
+            <div className="relative max-w-full">
               {/* Rotating circles around profile */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <motion.div 
@@ -264,7 +265,7 @@ const HeroSection = () => {
               
               {/* Profile image with simple border */}
               <motion.div 
-                className="profile-image w-64 h-64 sm:w-80 sm:h-80 xl:w-96 xl:h-96 shadow-2xl rounded-full overflow-hidden relative z-10"
+                className="profile-image w-64 h-64 sm:w-80 sm:h-80 xl:w-96 xl:h-96 shadow-2xl rounded-full overflow-hidden relative z-10 max-w-[90vw] max-h-[90vw]"
                 whileHover={{ scale: 1.03 }}
                 transition={{ 
                   type: "spring", 
@@ -284,7 +285,7 @@ const HeroSection = () => {
               
               {/* Floating badges with enhanced animations */}
               <motion.div 
-                className="absolute top-5 -left-10 bg-card/90 backdrop-blur-md p-3 rounded-xl shadow-lg flex items-center gap-2 border border-primary/20 overflow-hidden"
+                className="absolute top-5 -left-10 bg-card/90 backdrop-blur-md p-3 rounded-xl shadow-lg flex items-center gap-2 border border-primary/20 overflow-hidden max-w-[200px]"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.5, duration: 0.5 }}
@@ -304,7 +305,7 @@ const HeroSection = () => {
               </motion.div>
               
               <motion.div 
-                className="absolute bottom-10 -right-5 bg-card/90 backdrop-blur-md p-3 rounded-xl shadow-lg flex items-center gap-2 border border-secondary/20 overflow-hidden"
+                className="absolute bottom-10 -right-5 bg-card/90 backdrop-blur-md p-3 rounded-xl shadow-lg flex items-center gap-2 border border-secondary/20 overflow-hidden max-w-[200px]"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.8, duration: 0.5 }}
@@ -331,12 +332,12 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 0.8 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20 max-w-full overflow-hidden"
         >
           {features.map((feature, index) => (
             <motion.div
               key={index}
-              className="bg-card/30 backdrop-blur-md p-6 rounded-xl border border-muted group relative overflow-hidden"
+              className="bg-card/30 backdrop-blur-md p-6 rounded-xl border border-muted group relative overflow-hidden max-w-full"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.2 + index * 0.2, duration: 0.6 }}
@@ -362,8 +363,8 @@ const HeroSection = () => {
                 <feature.icon className={index % 2 === 0 ? 'text-primary' : 'text-secondary'} size={22} />
               </motion.div>
               
-              <h3 className="font-alegreya text-xl font-semibold mb-2 relative z-10">{feature.title}</h3>
-              <p className="text-muted-foreground text-sm relative z-10">{feature.description}</p>
+              <h3 className="font-alegreya text-xl font-semibold mb-2 relative z-10 break-words">{feature.title}</h3>
+              <p className="text-muted-foreground text-sm relative z-10 break-words">{feature.description}</p>
               
               <motion.div 
                 className="absolute bottom-0 right-0 w-20 h-20 opacity-10"
