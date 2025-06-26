@@ -16,17 +16,17 @@ const AboutSection = () => {
     {
       title: "Senior UI/UX Designer",
       company: "TechFusion Inc.",
-      period: "2020 - Present"
+      period: "2024 - Present"
     },
     {
       title: "Full Stack Developer",
       company: "WebWorks Agency",
-      period: "2018 - 2020"
+      period: "2024 - 2025"
     },
     {
       title: "Junior Web Developer",
       company: "Creative Solutions Ltd.",
-      period: "2016 - 2018"
+      period: "2022 - 2024"
     }
   ];
 
