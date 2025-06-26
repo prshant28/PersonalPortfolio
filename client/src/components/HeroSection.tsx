@@ -3,7 +3,6 @@ import { Download, ArrowRight, Github, Linkedin, Mail, Code, Palette, Lightbulb,
 import { Button } from "@/components/ui/button";
 import TypingEffect from "./TypingEffect";
 import { useRef } from "react";
-import profileImage from "../assets/profile.png";
 
 const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -78,7 +77,7 @@ const HeroSection = () => {
       <div className="absolute bottom-20 right-0 left-0 mx-auto w-[30rem] sm:w-[40rem] h-40 sm:h-60 rounded-full bg-gradient-to-t from-secondary/10 via-primary/10 to-transparent blur-3xl animate-blob animation-delay-4000"></div>
       
       <motion.div 
-        className="container mx-auto relative z-10"
+        className="container mx-auto relative z-10 overflow-hidden"
         style={{ y, opacity }}
       >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center">
@@ -275,16 +274,16 @@ const HeroSection = () => {
                 <div className="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-primary animate-gradient-rotation rounded-full opacity-70"></div>
                 <div className="absolute inset-[4px] rounded-full overflow-hidden bg-card">
                   <img 
-                    src={profileImage} 
+                    src="https://www.gadgetsfever.in/wp-content/uploads/2024/11/CEO-Of-Gadgets-Fever-1024x1024.jpg" 
                     alt="Prashant - Web Developer and UI/UX Designer" 
                     className="w-full h-full object-cover"
                   />
                 </div>
               </motion.div>
               
-              {/* Floating badges with enhanced animations */}
+              {/* Floating badges with enhanced animations - Fixed positioning */}
               <motion.div 
-                className="absolute top-3 sm:top-5 -left-6 sm:-left-10 bg-card/90 backdrop-blur-md p-2 sm:p-3 rounded-xl shadow-lg flex items-center gap-1 sm:gap-2 border border-primary/20 overflow-hidden"
+                className="absolute top-3 sm:top-5 -left-8 sm:-left-12 bg-card/90 backdrop-blur-md p-2 sm:p-3 rounded-xl shadow-lg flex items-center gap-1 sm:gap-2 border border-primary/20 overflow-hidden z-20"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.5, duration: 0.5 }}
@@ -294,7 +293,7 @@ const HeroSection = () => {
                 }}
               >
                 <div className="text-primary font-semibold text-sm sm:text-base">5+</div>
-                <div className="text-xs sm:text-sm font-poppins">Years Experience</div>
+                <div className="text-xs sm:text-sm font-poppins whitespace-nowrap">Years Experience</div>
                 <motion.div 
                   className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10"
                   initial={{ x: "-100%" }}
@@ -304,7 +303,7 @@ const HeroSection = () => {
               </motion.div>
               
               <motion.div 
-                className="absolute bottom-6 sm:bottom-10 -right-3 sm:-right-5 bg-card/90 backdrop-blur-md p-2 sm:p-3 rounded-xl shadow-lg flex items-center gap-1 sm:gap-2 border border-secondary/20 overflow-hidden"
+                className="absolute bottom-6 sm:bottom-10 -right-6 sm:-right-8 bg-card/90 backdrop-blur-md p-2 sm:p-3 rounded-xl shadow-lg flex items-center gap-1 sm:gap-2 border border-secondary/20 overflow-hidden z-20"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.8, duration: 0.5 }}
@@ -314,7 +313,7 @@ const HeroSection = () => {
                 }}
               >
                 <div className="text-secondary font-semibold text-sm sm:text-base">40+</div>
-                <div className="text-xs sm:text-sm font-poppins">Projects Completed</div>
+                <div className="text-xs sm:text-sm font-poppins whitespace-nowrap">Projects Completed</div>
                 <motion.div 
                   className="absolute inset-0 bg-gradient-to-r from-secondary/10 to-primary/10"
                   initial={{ x: "-100%" }}
@@ -331,7 +330,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 0.8 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-16 sm:mt-20"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-16 sm:mt-20 overflow-hidden"
         >
           {features.map((feature, index) => (
             <motion.div

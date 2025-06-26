@@ -90,10 +90,10 @@ const TimelineItem = ({ event, index, total }: {
     <motion.div 
       ref={itemRef}
       style={{ opacity, x, scale }}
-      className={`timeline-item ${isLeft ? 'left' : 'right'}`}
+      className={`timeline-item ${isLeft ? 'left' : 'right'} overflow-hidden`}
     >
       <motion.div 
-        className="timeline-content group"
+        className="timeline-content group overflow-hidden"
         whileHover={{ scale: 1.03 }}
         transition={{ type: "spring", stiffness: 400, damping: 10 }}
       >
@@ -146,7 +146,7 @@ const Timeline: React.FC = () => {
     <section 
       id="timeline" 
       ref={sectionRef}
-      className="py-24 px-6 relative overflow-hidden"
+      className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
     >
       {/* Dynamic gradient background with parallax effect */}
       <motion.div 
@@ -178,7 +178,7 @@ const Timeline: React.FC = () => {
         />
       ))}
       
-      <div className="container mx-auto relative z-10">
+      <div className="container mx-auto relative z-10 overflow-hidden">
         <motion.div 
           style={{ opacity, y: titleY }}
           className="text-center mb-16"
@@ -214,13 +214,13 @@ const Timeline: React.FC = () => {
           
           <motion.p 
             style={{ y: descY }}
-            className="max-w-2xl mx-auto text-muted-foreground"
+            className="max-w-2xl mx-auto text-muted-foreground font-poppins"
           >
             A chronological overview of my recent projects and achievements from November 2024 onwards.
           </motion.p>
         </motion.div>
         
-        <div className="timeline-container relative min-h-[800px] pb-10">
+        <div className="timeline-container relative min-h-[800px] pb-10 overflow-hidden">
           {timelineEvents.map((event, index) => (
             <TimelineItem 
               key={index} 
@@ -240,7 +240,7 @@ const Timeline: React.FC = () => {
           className="mt-16 text-center max-w-2xl mx-auto bg-card/20 backdrop-blur-sm p-4 rounded-lg border border-primary/10"
         >
           <h3 className="text-sm font-medium text-secondary mb-2">Professional Web Developer Journey</h3>
-          <p className="text-xs text-muted-foreground">Tracking my growth as a web developer since November 2024, from launching WordPress sites to winning app contests. Explore my journey through various tech projects and achievements.</p>
+          <p className="text-xs text-muted-foreground font-poppins">Tracking my growth as a web developer since November 2024, from launching WordPress sites to winning app contests. Explore my journey through various tech projects and achievements.</p>
         </motion.div>
       </div>
     </section>
