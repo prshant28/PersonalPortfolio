@@ -374,3 +374,16 @@
 .overflow-hidden-x {
   overflow-x: hidden !important;
 }
+html, body {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden !important;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
