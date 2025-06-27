@@ -81,12 +81,6 @@
     @apply font-poppins;
   }
 
-  /* Prevent horizontal overflow */
-  .container {
-    max-width: 100%;
-    overflow-x: hidden;
-  }
-}
 
 @layer components {
   .skill-bar {
