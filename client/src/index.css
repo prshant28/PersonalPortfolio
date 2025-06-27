@@ -387,3 +387,12 @@ html, body {
 * {
   outline: 1px solid red !important;
 }
+
+style={{
+  width: particle.size,
+  height: particle.size,
+  left: `${particle.x}%`,
+  top: `${particle.y}%`,
+  x: useTransform(scrollYProgress, [0, 1], [0, particle.x > 50 ? -50 : 50]), // reduce offset
+  overflow: "hidden"
+}}
