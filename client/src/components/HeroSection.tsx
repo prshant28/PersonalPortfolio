@@ -3,7 +3,7 @@ import { Download, ArrowRight, Github, Linkedin, Mail, Code, Palette, Lightbulb,
 import { Button } from "@/components/ui/button";
 import TypingEffect from "./TypingEffect";
 import { useRef } from "react";
-import profileImage from "../assets/profile.png";
+import profileImage from "../assets/image.png";
 
 const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -112,7 +112,7 @@ const HeroSection = () => {
                   Prashant
                 </span>
                 <motion.span 
-                  className="absolute -top-6 sm:-top-8 -right-6 sm:-right-8 text-secondary text-2xl sm:text-4xl"
+                  className="absolute -top-6 sm:-top-8 -right-6 sm:-right-8 text-secondary text-2xl sm:text-4xl z-20"
                   initial={{ scale: 0, rotate: -20 }}
                   animate={{ scale: 1, rotate: 0 }}
                   transition={{ delay: 1.5, type: "spring" }}
@@ -230,7 +230,7 @@ const HeroSection = () => {
                 />
               </div>
               
-              {/* Floating elements */}
+              {/* Floating elements with proper z-index */}
               {[
                 { icon: Star, position: "top-0 left-6 sm:left-10", delay: 0, color: "text-primary" },
                 { icon: Trophy, position: "bottom-16 sm:bottom-20 -left-6 sm:-left-10", delay: 0.2, color: "text-secondary" },
@@ -239,7 +239,7 @@ const HeroSection = () => {
               ].map((item, index) => (
                 <motion.div
                   key={index}
-                  className={`absolute ${item.position} z-10 bg-card/80 backdrop-blur-sm p-1.5 sm:p-2 rounded-full shadow-lg border border-primary/20`}
+                  className={`absolute ${item.position} z-30 bg-card/80 backdrop-blur-sm p-1.5 sm:p-2 rounded-full shadow-lg border border-primary/20`}
                   initial={{ opacity: 0, scale: 0 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 1 + item.delay, type: "spring" }}
@@ -264,7 +264,7 @@ const HeroSection = () => {
               
               {/* Profile image with simple border */}
               <motion.div 
-                className="profile-image w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 xl:w-96 xl:h-96 shadow-2xl rounded-full overflow-hidden relative z-10"
+                className="profile-image w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 xl:w-96 xl:h-96 shadow-2xl rounded-full overflow-hidden relative z-20"
                 whileHover={{ scale: 1.03 }}
                 transition={{ 
                   type: "spring", 
@@ -282,9 +282,9 @@ const HeroSection = () => {
                 </div>
               </motion.div>
               
-              {/* Floating badges with enhanced animations */}
+              {/* Floating badges with enhanced animations and proper z-index */}
               <motion.div 
-                className="absolute top-3 sm:top-5 -left-6 sm:-left-10 bg-card/90 backdrop-blur-md p-2 sm:p-3 rounded-xl shadow-lg flex items-center gap-1 sm:gap-2 border border-primary/20 overflow-hidden"
+                className="absolute top-3 sm:top-5 -left-6 sm:-left-10 bg-card/90 backdrop-blur-md p-2 sm:p-3 rounded-xl shadow-lg flex items-center gap-1 sm:gap-2 border border-primary/20 overflow-hidden z-30"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.5, duration: 0.5 }}
@@ -304,7 +304,7 @@ const HeroSection = () => {
               </motion.div>
               
               <motion.div 
-                className="absolute bottom-6 sm:bottom-10 -right-3 sm:-right-5 bg-card/90 backdrop-blur-md p-2 sm:p-3 rounded-xl shadow-lg flex items-center gap-1 sm:gap-2 border border-secondary/20 overflow-hidden"
+                className="absolute bottom-6 sm:bottom-10 -right-3 sm:-right-5 bg-card/90 backdrop-blur-md p-2 sm:p-3 rounded-xl shadow-lg flex items-center gap-1 sm:gap-2 border border-secondary/20 overflow-hidden z-30"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.8, duration: 0.5 }}

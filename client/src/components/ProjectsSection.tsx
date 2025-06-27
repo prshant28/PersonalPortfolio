@@ -29,7 +29,7 @@ const ProjectsSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-12 sm:mb-16"
         >
           <span className="text-primary font-alegreya text-sm sm:text-lg uppercase tracking-widest mb-2 inline-block">Portfolio</span>
           <h2 className="font-alegreya font-bold text-2xl sm:text-3xl lg:text-4xl xl:text-5xl mb-4 tracking-wide uppercase">Featured Projects</h2>
@@ -44,7 +44,7 @@ const ProjectsSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-12"
+          className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-12 sm:mb-16"
         >
           {categories.map((category) => (
             <Button
@@ -52,14 +52,14 @@ const ProjectsSection = () => {
               variant={filter === category ? "default" : "outline"}
               size="sm"
               onClick={() => setFilter(category)}
-              className={`rounded-full font-alegreya uppercase text-xs tracking-wider px-4 sm:px-6 ${
+              className={`rounded-full font-alegreya uppercase text-xs tracking-wider px-4 sm:px-6 transition-all duration-300 ${
                 filter === category 
-                  ? "bg-primary shadow-lg shadow-primary/20" 
-                  : "hover:bg-primary/10 hover:text-primary border-primary/20"
+                  ? "bg-primary shadow-lg shadow-primary/20 scale-105" 
+                  : "hover:bg-primary/10 hover:text-primary border-primary/20 hover:scale-105"
               }`}
             >
               {category === "all" ? "All" : category}
-              {filter === category && <span className="ml-2 flex h-2 w-2 rounded-full bg-white"></span>}
+              {filter === category && <span className="ml-2 flex h-2 w-2 rounded-full bg-white animate-pulse"></span>}
             </Button>
           ))}
         </motion.div>
@@ -81,7 +81,7 @@ const ProjectsSection = () => {
               >
                 {/* Project Card with hover effects */}
                 <motion.div 
-                  className="rounded-xl overflow-hidden bg-card border border-muted hover:border-primary/30 transition-all duration-300 shadow-lg hover:shadow-xl"
+                  className="rounded-xl overflow-hidden bg-card/80 backdrop-blur-sm border border-muted hover:border-primary/30 transition-all duration-300 shadow-lg hover:shadow-xl"
                   whileHover={{ y: -10 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
@@ -146,7 +146,7 @@ const ProjectsSection = () => {
                         <Badge 
                           key={techIndex} 
                           variant="secondary" 
-                          className="rounded-full text-xs font-medium bg-muted/50 hover:bg-primary/10 hover:text-primary border border-transparent hover:border-primary/20 transition-colors"
+                          className="rounded-full text-xs font-medium bg-muted/50 hover:bg-primary/10 hover:text-primary border border-transparent hover:border-primary/20 transition-colors font-poppins"
                         >
                           {tech}
                         </Badge>
@@ -191,7 +191,7 @@ const ProjectsSection = () => {
         >
           <Button 
             size="lg" 
-            className="gap-2 rounded-full px-6 sm:px-8 font-medium shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-shadow group"
+            className="gap-2 rounded-full px-6 sm:px-8 font-medium shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-shadow group font-poppins"
           >
             View All Projects 
             <span className="relative transition-all duration-300 group-hover:translate-x-1">
