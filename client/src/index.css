@@ -27,6 +27,10 @@
   --radius: 0.5rem;
 }
 
+#root{
+  overflow-x: hidden !important;
+}
+
 .light {
   --background: 0 0% 100%;
   --foreground: 240 10% 3.9%;
@@ -54,22 +58,16 @@
     @apply border-border;
   }
 
-  html {
-    scroll-behavior: smooth;
-    overflow-x: hidden;
-  }
-
   body {
     @apply font-inter antialiased bg-background text-foreground;
-    overflow-x: hidden;
-    width: 100%;
-    max-width: 100vw;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 
   section {
     scroll-margin-top: 80px;
-    overflow-x: hidden;
-    width: 100%;
   }
 
   /* Use Poppins for all description text */
@@ -80,7 +78,7 @@
   p, .text-muted-foreground {
     @apply font-poppins;
   }
-
+}
 
 @layer components {
   .skill-bar {
@@ -189,7 +187,6 @@
   /* Timeline styles with enhanced animations */
   .timeline-container {
     @apply relative;
-    overflow-x: hidden;
   }
   
   .timeline-container::after {
@@ -201,7 +198,6 @@
   
   .timeline-item {
     @apply relative w-full mb-16 last:mb-0;
-    overflow-x: hidden;
   }
   
   .timeline-item::after {
@@ -221,7 +217,6 @@
   
   .timeline-content {
     @apply relative w-[calc(50%-40px)] p-4 sm:p-6 rounded-lg bg-card/80 backdrop-blur-sm border border-border shadow-lg transition-all duration-300;
-    max-width: calc(50% - 40px);
     &:hover {
       @apply shadow-xl transform scale-105;
       border-color: hsl(var(--primary)/0.5);
@@ -272,7 +267,6 @@
     
     .timeline-content {
       @apply w-[calc(100%-60px)] ml-auto;
-      max-width: calc(100% - 60px);
     }
     
     .timeline-item.left .timeline-content,
@@ -326,11 +320,6 @@
   .grid-responsive {
     @apply grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
   }
-
-  /* Prevent horizontal scroll */
-  .no-scrollbar-x {
-    overflow-x: hidden;
-  }
 }
 
 /* Additional responsive breakpoints */
@@ -352,23 +341,4 @@
   .container {
     max-width: 1400px;
   }
-}
-
-/* Fix for horizontal scrolling issues */
-* {
-  box-sizing: border-box;
-}
-
-.overflow-hidden-x {
-  overflow-x: hidden !important;
-}
-
-html, body {
-  width: 100%;
-  max-width: 100vw;
-  overflow-x: hidden !important;
-}
-
-* {
-  box-sizing: border-box;
 }

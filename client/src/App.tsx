@@ -19,9 +19,9 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <MouseInteractionProvider>
-          <div className="relative min-h-screen overflow-hidden-x">
+          <div className="relative min-h-screen">
             <Navbar />
-            <main id="main" className="overflow-x-hidden">
+            <main id="main">
               <HeroSection />
               <ProjectsSection />
               <TechStackCarousel />

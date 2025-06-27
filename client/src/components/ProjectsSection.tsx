@@ -23,7 +23,7 @@ const ProjectsSection = () => {
       <div className="absolute top-40 right-0 w-64 sm:w-96 h-64 sm:h-96 rounded-full bg-primary/5 filter blur-3xl -z-10"></div>
       <div className="absolute bottom-20 left-0 w-64 sm:w-96 h-64 sm:h-96 rounded-full bg-primary/5 filter blur-3xl -z-10"></div>
       
-      <div className="container mx-auto overflow-hidden">
+      <div className="container mx-auto">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -44,7 +44,7 @@ const ProjectsSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-12 overflow-hidden"
+          className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-12"
         >
           {categories.map((category) => (
             <Button
@@ -65,7 +65,7 @@ const ProjectsSection = () => {
         </motion.div>
         
         {/* Projects grid with staggered animation */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 overflow-hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           <AnimatePresence mode="wait">
             {filteredProjects.map((project, index) => (
               <motion.div 
@@ -75,7 +75,7 @@ const ProjectsSection = () => {
                 exit={{ opacity: 0, y: 20 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group relative overflow-hidden"
+                className="group relative"
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
@@ -141,7 +141,7 @@ const ProjectsSection = () => {
                     </p>
                     
                     {/* Technologies used */}
-                    <div className="flex flex-wrap gap-2 mb-3 overflow-hidden">
+                    <div className="flex flex-wrap gap-2 mb-3">
                       {project.technologies.map((tech, techIndex) => (
                         <Badge 
                           key={techIndex} 
