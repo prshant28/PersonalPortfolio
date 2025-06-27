@@ -25,7 +25,7 @@ const TechStackCarousel = () => {
 
   return (
     <div className="py-10 bg-background overflow-hidden">
-      <div className="container mx-auto px-4 sm:px-6">
+      <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -33,25 +33,19 @@ const TechStackCarousel = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-8"
         >
-          <h3 className="font-alegreya font-semibold text-xl sm:text-2xl text-primary">Technologies I Work With</h3>
+          <h3 className="font-poppins font-semibold text-xl text-primary">Technologies I Work With</h3>
         </motion.div>
         
-        {/* FIXED: Carousel container with proper overflow handling */}
-        <div className="flex overflow-hidden max-w-full">
-          <div className="tech-stack-carousel flex space-x-12 sm:space-x-16 min-w-max">
+        <div className="flex space-x-12 overflow-hidden">
+          <div className="tech-stack-carousel flex space-x-16">
             {techIcons.map((tech, index) => (
-              <motion.div 
+              <div 
                 key={index}
-                className="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-card/80 backdrop-blur-sm rounded-lg p-3 sm:p-4 opacity-80 hover:opacity-100 transition-opacity border border-muted hover:border-primary/30 flex-shrink-0"
+                className="flex items-center justify-center w-20 h-20 bg-card rounded-lg p-4 opacity-80 hover:opacity-100 transition-opacity"
                 title={tech.name}
-                whileHover={{ 
-                  scale: 1.1,
-                  y: -5
-                }}
-                transition={{ type: "spring", stiffness: 300 }}
               >
-                <tech.icon size={32} color={tech.color} className="sm:w-10 sm:h-10" />
-              </motion.div>
+                <tech.icon size={42} color={tech.color} />
+              </div>
             ))}
           </div>
         </div>

@@ -31,11 +31,11 @@ const HeroSection = () => {
     { icon: Lightbulb, title: "Creative Ideas", description: "Innovative solutions to complex problems" }
   ];
 
-  // FIXED: Animated particles with proper containment
+  // Animated particles - will use framer motion to create a parallax effect
   const particles = Array.from({ length: 20 }).map((_, i) => ({
     size: Math.random() * 8 + 4,
-    x: Math.random() * 80 + 10, // Keep within 10-90% to prevent overflow
-    y: Math.random() * 80 + 10, // Keep within 10-90% to prevent overflow
+    x: Math.random() * 100,
+    y: Math.random() * 100,
     duration: Math.random() * 20 + 10,
     delay: Math.random() * 2
   }));
@@ -46,44 +46,39 @@ const HeroSection = () => {
       ref={sectionRef}
       className="min-h-screen flex items-center pt-20 pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
     >
-      {/* FIXED: Parallax particles background with proper containment */}
-      <div className="absolute inset-0 overflow-hidden">
-        {particles.map((particle, index) => (
-          <motion.div
-            key={index}
-            className="absolute rounded-full bg-gradient-to-tr from-secondary to-primary opacity-20"
-            style={{
-              width: particle.size,
-              height: particle.size,
-              left: `${particle.x}%`,
-              top: `${particle.y}%`,
-            }}
-            animate={{ 
-              opacity: [0.1, 0.5, 0.1],
-              scale: [1, 1.5, 1],
-              rotate: [0, 180],
-              x: [0, Math.sin(index) * 20, 0], // Constrained movement
-              y: [0, Math.cos(index) * 20, 0], // Constrained movement
-            }}
-            transition={{
-              duration: particle.duration,
-              repeat: Infinity,
-              delay: particle.delay,
-              ease: "easeInOut"
-            }}
-          />
-        ))}
-      </div>
+      {/* Parallax particles background */}
+      {particles.map((particle, index) => (
+        <motion.div
+          key={index}
+          className="absolute rounded-full bg-gradient-to-tr from-secondary to-primary opacity-20"
+          style={{
+            width: particle.size,
+            height: particle.size,
+            left: `${particle.x}%`,
+            top: `${particle.y}%`,
+            x: useTransform(scrollYProgress, [0, 1], [0, particle.x > 50 ? -100 : 100]),
+          }}
+          initial={{ opacity: 0 }}
+          animate={{ 
+            opacity: [0.1, 0.5, 0.1],
+            scale: [1, 1.5, 1],
+            rotate: [0, 180]
+          }}
+          transition={{
+            duration: particle.duration,
+            repeat: Infinity,
+            delay: particle.delay
+          }}
+        />
+      ))}
       
-      {/* FIXED: Hero background gradients with proper containment */}
-      <div className="absolute inset-0 overflow-hidden hero-background">
-        <div className="absolute top-20 left-0 w-[20rem] sm:w-[30rem] h-[20rem] sm:h-[30rem] rounded-full bg-gradient-to-r from-primary/20 to-primary/5 blur-3xl animate-blob transform -translate-x-1/4"></div>
-        <div className="absolute top-60 right-0 w-64 sm:w-96 h-64 sm:h-96 rounded-full bg-gradient-to-l from-secondary/20 to-secondary/5 blur-3xl animate-blob animation-delay-2000 transform translate-x-1/4"></div>
-        <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 w-[30rem] sm:w-[40rem] h-40 sm:h-60 rounded-full bg-gradient-to-t from-secondary/10 via-primary/10 to-transparent blur-3xl animate-blob animation-delay-4000"></div>
-      </div>
+      {/* Hero background gradients with animation */}
+      <div className="absolute top-20 -left-40 w-[20rem] sm:w-[30rem] h-[20rem] sm:h-[30rem] rounded-full bg-gradient-to-r from-primary/20 to-primary/5 blur-3xl animate-blob"></div>
+      <div className="absolute top-60 right-10 w-64 sm:w-96 h-64 sm:h-96 rounded-full bg-gradient-to-l from-secondary/20 to-secondary/5 blur-3xl animate-blob animation-delay-2000"></div>
+      <div className="absolute bottom-20 right-0 left-0 mx-auto w-[30rem] sm:w-[40rem] h-40 sm:h-60 rounded-full bg-gradient-to-t from-secondary/10 via-primary/10 to-transparent blur-3xl animate-blob animation-delay-4000"></div>
       
       <motion.div 
-        className="container mx-auto relative z-10 max-w-full overflow-hidden"
+        className="container mx-auto relative z-10"
         style={{ y, opacity }}
       >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center">
@@ -220,9 +215,9 @@ const HeroSection = () => {
             transition={{ duration: 0.8 }}
             className="flex justify-center order-1 lg:order-2"
           >
-            <div className="relative max-w-full">
-              {/* FIXED: Rotating circles around profile with proper containment */}
-              <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+            <div className="relative">
+              {/* Rotating circles around profile */}
+              <div className="absolute inset-0 flex items-center justify-center">
                 <motion.div 
                   className="w-[calc(100%+2rem)] sm:w-[calc(100%+3rem)] h-[calc(100%+2rem)] sm:h-[calc(100%+3rem)] rounded-full border-2 border-dashed border-primary/20 absolute"
                   animate={{ rotate: 360 }}
@@ -235,7 +230,7 @@ const HeroSection = () => {
                 />
               </div>
               
-              {/* FIXED: Floating elements with proper z-index and containment */}
+              {/* Floating elements with proper z-index */}
               {[
                 { icon: Star, position: "top-0 left-6 sm:left-10", delay: 0, color: "text-primary" },
                 { icon: Trophy, position: "bottom-16 sm:bottom-20 -left-6 sm:-left-10", delay: 0.2, color: "text-secondary" },
@@ -267,7 +262,7 @@ const HeroSection = () => {
                 }}
               />
               
-              {/* FIXED: Profile image with proper z-index */}
+              {/* Profile image with simple border */}
               <motion.div 
                 className="profile-image w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 xl:w-96 xl:h-96 shadow-2xl rounded-full overflow-hidden relative z-20"
                 whileHover={{ scale: 1.03 }}
@@ -287,7 +282,7 @@ const HeroSection = () => {
                 </div>
               </motion.div>
               
-              {/* FIXED: Floating badges with enhanced animations and proper z-index */}
+              {/* Floating badges with enhanced animations and proper z-index */}
               <motion.div 
                 className="absolute top-3 sm:top-5 -left-6 sm:-left-10 bg-card/90 backdrop-blur-md p-2 sm:p-3 rounded-xl shadow-lg flex items-center gap-1 sm:gap-2 border border-primary/20 overflow-hidden z-30"
                 initial={{ opacity: 0, x: 20 }}
@@ -331,12 +326,12 @@ const HeroSection = () => {
           </motion.div>
         </div>
         
-        {/* FIXED: Features grid with enhanced animations and proper containment */}
+        {/* Features grid with enhanced animations */}
         <motion.div 
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 0.8 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-16 sm:mt-20 max-w-full overflow-hidden"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-16 sm:mt-20"
         >
           {features.map((feature, index) => (
             <motion.div
