@@ -65,9 +65,11 @@ const Navbar = () => {
     }`}>
       <div className="container mx-auto px-4 sm:px-6 py-4">
         <nav className="flex justify-between items-center">
-          <a 
+          <motion.a 
             href="#home" 
             className="group flex items-center gap-2 relative z-20"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 300 }}
           >
             <div className="w-8 h-8 sm:w-10 sm:h-10 bg-primary/20 rounded-lg flex items-center justify-center border border-primary/30 group-hover:bg-primary/30 transition-colors">
               <Code size={16} className="sm:w-[18px] sm:h-[18px] text-primary" />
@@ -78,19 +80,21 @@ const Navbar = () => {
               </span>
               <span className="text-foreground font-alegreya text-xs sm:text-sm tracking-widest block -mt-1">.developer</span>
             </div>
-          </a>
+          </motion.a>
           
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center gap-1">
             {navLinks.map(link => (
-              <a 
+              <motion.a 
                 key={link.href}
                 href={link.href} 
-                className={`font-alegreya py-2 px-3 xl:px-4 rounded-md uppercase tracking-wider text-xs xl:text-sm relative group ${
+                className={`font-alegreya py-2 px-3 xl:px-4 rounded-md uppercase tracking-wider text-xs xl:text-sm relative group transition-colors duration-300 ${
                   activeSection === link.href.substring(1) 
                     ? "text-primary" 
                     : "text-foreground/80 hover:text-primary"
                 }`}
+                whileHover={{ y: -2 }}
+                transition={{ type: "spring", stiffness: 300 }}
               >
                 {activeSection === link.href.substring(1) && (
                   <motion.span 
@@ -101,27 +105,30 @@ const Navbar = () => {
                 )}
                 {link.label}
                 <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-primary"></span>
-              </a>
+              </motion.a>
             ))}
             
             <div className="ml-4 flex items-center gap-4 pl-4 border-l border-muted">
               <ThemeToggle />
-              <a 
+              <motion.a 
                 href="#contact" 
-                className="bg-primary/80 hover:bg-primary text-white py-2 px-4 xl:px-5 rounded-full text-xs xl:text-sm font-medium transition-colors duration-300 flex items-center gap-1 shadow-lg shadow-primary/20"
+                className="bg-primary/80 hover:bg-primary text-white py-2 px-4 xl:px-5 rounded-full text-xs xl:text-sm font-medium transition-colors duration-300 flex items-center gap-1 shadow-lg shadow-primary/20 font-poppins"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 Hire Me <ChevronRight size={12} className="xl:w-[14px] xl:h-[14px]" />
-              </a>
+              </motion.a>
             </div>
           </div>
           
           {/* Mobile Menu Button */}
           <div className="lg:hidden flex items-center gap-3 sm:gap-4">
             <ThemeToggle />
-            <button 
+            <motion.button 
               className="text-foreground relative z-20 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center" 
               onClick={toggleMobileMenu}
               aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+              whileTap={{ scale: 0.9 }}
             >
               <motion.div
                 initial={false}
@@ -134,7 +141,7 @@ const Navbar = () => {
               >
                 {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
               </motion.div>
-            </button>
+            </motion.button>
           </div>
         </nav>
       </div>
@@ -154,11 +161,12 @@ const Navbar = () => {
                 <motion.a 
                   key={link.href} 
                   href={link.href} 
-                  className="font-alegreya py-3 sm:py-4 text-xl sm:text-2xl font-medium uppercase tracking-wider border-b border-muted flex justify-between items-center"
+                  className="font-alegreya py-3 sm:py-4 text-xl sm:text-2xl font-medium uppercase tracking-wider border-b border-muted flex justify-between items-center hover:text-primary transition-colors"
                   onClick={closeMobileMenu}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1, duration: 0.3 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   {link.label}
                   <ChevronRight size={16} className="sm:w-[18px] sm:h-[18px] text-primary" />
@@ -172,13 +180,14 @@ const Navbar = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.3 }}
             >
-              <a 
+              <motion.a 
                 href="#contact" 
-                className="w-full bg-primary text-white py-3 px-6 rounded-full text-base sm:text-lg font-medium flex items-center justify-center gap-2 shadow-lg"
+                className="w-full bg-primary text-white py-3 px-6 rounded-full text-base sm:text-lg font-medium flex items-center justify-center gap-2 shadow-lg font-poppins"
                 onClick={closeMobileMenu}
+                whileTap={{ scale: 0.95 }}
               >
                 Get In Touch <ChevronRight size={16} className="sm:w-[18px] sm:h-[18px]" />
-              </a>
+              </motion.a>
               <div className="mt-4 sm:mt-6 text-center text-muted-foreground">
                 <p className="font-alegreya text-sm sm:text-base">&copy; {new Date().getFullYear()} Prashant.dev</p>
                 <p className="text-xs sm:text-sm mt-1 font-poppins">UI/UX Designer & Full Stack Developer</p>
