@@ -80,7 +80,7 @@
   p, .text-muted-foreground {
     @apply font-poppins;
   }
-
+}
 
 @layer components {
   .skill-bar {
