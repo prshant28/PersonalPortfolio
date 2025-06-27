@@ -19,7 +19,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <MouseInteractionProvider>
-          <div className="relative min-h-screen overflow-x-hidden">
+          <div className="relative min-h-screen overflow-hidden-x">
             <Navbar />
             <main id="main" className="overflow-x-hidden">
               <HeroSection />
