@@ -52,38 +52,30 @@
 @layer base {
   * {
     @apply border-border;
-    box-sizing: border-box;
   }
 
   html {
     scroll-behavior: smooth;
-    overflow-x: hidden !important;
-    max-width: 100vw;
-    width: 100%;
+    overflow-x: hidden;
   }
 
   body {
     @apply font-inter antialiased bg-background text-foreground;
-    overflow-x: hidden !important;
+    overflow-x: hidden;
     width: 100%;
     max-width: 100vw;
-    margin: 0;
-    padding: 0;
   }
 
   #root {
     overflow-x: hidden !important;
     width: 100%;
     max-width: 100vw;
-    min-height: 100vh;
   }
 
   section {
     scroll-margin-top: 80px;
-    overflow-x: hidden !important;
+    overflow-x: hidden;
     width: 100%;
-    max-width: 100%;
-    position: relative;
   }
 
   /* Use Poppins for all description text */
@@ -98,13 +90,7 @@
   /* Prevent horizontal overflow */
   .container {
     max-width: 100%;
-    overflow-x: hidden !important;
-    width: 100%;
-  }
-
-  /* Fix for any absolute positioned elements */
-  .absolute {
-    max-width: 100vw;
+    overflow-x: hidden;
   }
 }
 
@@ -215,9 +201,7 @@
   /* Timeline styles with enhanced animations */
   .timeline-container {
     @apply relative;
-    overflow-x: hidden !important;
-    width: 100%;
-    max-width: 100%;
+    overflow-x: hidden;
   }
   
   .timeline-container::after {
@@ -229,8 +213,7 @@
   
   .timeline-item {
     @apply relative w-full mb-16 last:mb-0;
-    overflow-x: hidden !important;
-    max-width: 100%;
+    overflow-x: hidden;
   }
   
   .timeline-item::after {
@@ -249,11 +232,8 @@
   }
   
   .timeline-content {
-    @apply relative p-4 sm:p-6 rounded-lg bg-card/80 backdrop-blur-sm border border-border shadow-lg transition-all duration-300;
-    width: calc(50% - 40px);
+    @apply relative w-[calc(50%-40px)] p-4 sm:p-6 rounded-lg bg-card/80 backdrop-blur-sm border border-border shadow-lg transition-all duration-300;
     max-width: calc(50% - 40px);
-    overflow-x: hidden;
-    
     &:hover {
       @apply shadow-xl transform scale-105;
       border-color: hsl(var(--primary)/0.5);
@@ -303,9 +283,8 @@
     }
     
     .timeline-content {
-      width: calc(100% - 60px);
+      @apply w-[calc(100%-60px)] ml-auto;
       max-width: calc(100% - 60px);
-      @apply ml-auto;
     }
     
     .timeline-item.left .timeline-content,
@@ -362,16 +341,7 @@
 
   /* Prevent horizontal scroll */
   .no-scrollbar-x {
-    overflow-x: hidden !important;
-  }
-
-  /* Fix for floating elements */
-  .floating-badge {
-    position: absolute;
-    z-index: 30;
-    max-width: calc(100vw - 2rem);
-    overflow: hidden;
-    white-space: nowrap;
+    overflow-x: hidden;
   }
 }
 
@@ -379,8 +349,6 @@
 @media (max-width: 480px) {
   .timeline-content {
     @apply p-3;
-    width: calc(100% - 40px);
-    max-width: calc(100% - 40px);
   }
   
   .timeline-title {
@@ -390,11 +358,6 @@
   .timeline-description {
     @apply text-xs;
   }
-
-  .floating-badge {
-    font-size: 0.75rem;
-    padding: 0.5rem;
-  }
 }
 
 @media (min-width: 1920px) {
@@ -403,37 +366,11 @@
   }
 }
 
-/* Global overflow fix */
+/* Fix for horizontal scrolling issues */
 * {
   box-sizing: border-box;
 }
 
 .overflow-hidden-x {
   overflow-x: hidden !important;
-}
-
-/* Ensure no element can cause horizontal scroll */
-body * {
-  max-width: 100%;
-}
-
-/* Fix for any transform elements that might overflow */
-[class*="translate-"], [class*="transform"] {
-  max-width: 100vw;
-}
-
-/* Specific fixes for common overflow causes */
-.absolute {
-  max-width: 100vw;
-}
-
-.fixed {
-  max-width: 100vw;
-}
-
-/* Grid and flex container fixes */
-.grid, .flex {
-  overflow-x: hidden;
-  width: 100%;
-  max-width: 100%;
 }
