@@ -3,7 +3,6 @@ import { Download, ArrowRight, Github, Linkedin, Mail, Code, Palette, Lightbulb,
 import { Button } from "@/components/ui/button";
 import TypingEffect from "./TypingEffect";
 import { useRef } from "react";
-import profileImage from "../assets/image.png";
 
 const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -12,8 +11,9 @@ const HeroSection = () => {
     offset: ["start start", "end start"]
   });
   
-  const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  // Reduced parallax effect to prevent visibility issues
+  const y = useTransform(scrollYProgress, [0, 1], [0, 50]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0.3]);
   
   // Texts for the typing effect
   const typingTexts = [
@@ -31,12 +31,12 @@ const HeroSection = () => {
     { icon: Lightbulb, title: "Creative Ideas", description: "Innovative solutions to complex problems" }
   ];
 
-  // Animated particles - will use framer motion to create a parallax effect
-  const particles = Array.from({ length: 20 }).map((_, i) => ({
-    size: Math.random() * 8 + 4,
+  // Reduced number of particles for better performance
+  const particles = Array.from({ length: 10 }).map((_, i) => ({
+    size: Math.random() * 6 + 3,
     x: Math.random() * 100,
     y: Math.random() * 100,
-    duration: Math.random() * 20 + 10,
+    duration: Math.random() * 15 + 8,
     delay: Math.random() * 2
   }));
 
@@ -46,23 +46,21 @@ const HeroSection = () => {
       ref={sectionRef}
       className="min-h-screen flex items-center pt-20 pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
     >
-      {/* Parallax particles background */}
+      {/* Simplified background particles */}
       {particles.map((particle, index) => (
         <motion.div
           key={index}
-          className="absolute rounded-full bg-gradient-to-tr from-secondary to-primary opacity-20"
+          className="absolute rounded-full bg-gradient-to-tr from-secondary to-primary opacity-10"
           style={{
             width: particle.size,
             height: particle.size,
             left: `${particle.x}%`,
             top: `${particle.y}%`,
-            x: useTransform(scrollYProgress, [0, 1], [0, particle.x > 50 ? -100 : 100]),
           }}
           initial={{ opacity: 0 }}
           animate={{ 
-            opacity: [0.1, 0.5, 0.1],
-            scale: [1, 1.5, 1],
-            rotate: [0, 180]
+            opacity: [0.05, 0.2, 0.05],
+            scale: [1, 1.2, 1],
           }}
           transition={{
             duration: particle.duration,
@@ -72,14 +70,13 @@ const HeroSection = () => {
         />
       ))}
       
-      {/* Hero background gradients with animation */}
-      <div className="absolute top-20 -left-40 w-[20rem] sm:w-[30rem] h-[20rem] sm:h-[30rem] rounded-full bg-gradient-to-r from-primary/20 to-primary/5 blur-3xl animate-blob"></div>
-      <div className="absolute top-60 right-10 w-64 sm:w-96 h-64 sm:h-96 rounded-full bg-gradient-to-l from-secondary/20 to-secondary/5 blur-3xl animate-blob animation-delay-2000"></div>
-      <div className="absolute bottom-20 right-0 left-0 mx-auto w-[30rem] sm:w-[40rem] h-40 sm:h-60 rounded-full bg-gradient-to-t from-secondary/10 via-primary/10 to-transparent blur-3xl animate-blob animation-delay-4000"></div>
+      {/* Simplified background gradients */}
+      <div className="absolute top-20 -left-40 w-[20rem] sm:w-[30rem] h-[20rem] sm:h-[30rem] rounded-full bg-gradient-to-r from-primary/10 to-primary/5 blur-3xl"></div>
+      <div className="absolute top-60 right-10 w-64 sm:w-96 h-64 sm:h-96 rounded-full bg-gradient-to-l from-secondary/10 to-secondary/5 blur-3xl"></div>
       
       <motion.div 
         className="container mx-auto relative z-10"
-        style={{ y, opacity }}
+        style={{ y: useTransform(scrollYProgress, [0, 1], [0, 20]), opacity }}
       >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center">
           <motion.div
@@ -89,7 +86,7 @@ const HeroSection = () => {
             className="order-2 lg:order-1 text-center lg:text-left"
           >
             <motion.div
-              initial={{ opacity: 0, scale: 0.8, x: -100 }}
+              initial={{ opacity: 0, scale: 0.8, x: -50 }}
               animate={{ opacity: 1, scale: 1, x: 0 }}
               transition={{ duration: 0.6 }}
             >
@@ -108,16 +105,16 @@ const HeroSection = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.8 }}
               >
-                <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent bg-size-200 animate-gradient-x">
+                <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
                   Prashant
                 </span>
                 <motion.span 
-                  className="absolute -top-6 sm:-top-8 -right-6 sm:-right-8 text-secondary text-2xl sm:text-4xl z-20"
+                  className="absolute -top-4 sm:-top-6 -right-4 sm:-right-6 text-secondary text-xl sm:text-3xl z-20"
                   initial={{ scale: 0, rotate: -20 }}
                   animate={{ scale: 1, rotate: 0 }}
                   transition={{ delay: 1.5, type: "spring" }}
                 >
-                  <Sparkles size={24} className="sm:w-8 sm:h-8 animate-pulse" />
+                  <Sparkles size={20} className="sm:w-6 sm:h-6 animate-pulse" />
                 </motion.span>
               </motion.h2>
             </motion.div>
@@ -135,7 +132,7 @@ const HeroSection = () => {
               Passionate about creating beautiful and functional web experiences with attention to detail and focus on user experience. Let's build something amazing together!
             </motion.p>
             
-            {/* SEO-optimized section - enhanced with more details */}
+            {/* SEO-optimized section */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -145,8 +142,7 @@ const HeroSection = () => {
               <h3 className="text-xs sm:text-sm font-medium text-secondary mb-2">Web Developer & UI/UX Designer in India</h3>
               <p className="text-xs text-muted-foreground font-poppins">
                 Specializing in React, Next.js, Node.js and modern web technologies. Creating beautiful, responsive and 
-                user-friendly websites with focus on performance and accessibility. Offering comprehensive web development 
-                services including e-commerce solutions, portfolio websites, and business applications.
+                user-friendly websites with focus on performance and accessibility.
               </p>
               <div className="mt-2 grid grid-cols-2 gap-1 text-xs font-poppins">
                 <div>• React/Next.js Expert</div>
@@ -156,7 +152,7 @@ const HeroSection = () => {
               </div>
             </motion.div>
             
-            {/* Social Icons with improved animations */}
+            {/* Social Icons */}
             <div className="flex gap-4 sm:gap-6 mb-8 sm:mb-10 justify-center lg:justify-start">
               {[
                 { icon: Github, label: "GitHub", color: "bg-[#333]/10 hover:bg-[#333]/20" },
@@ -167,24 +163,18 @@ const HeroSection = () => {
                   key={social.label}
                   href="#" 
                   className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full ${social.color} flex items-center justify-center backdrop-blur-sm relative group overflow-hidden z-10`}
-                  whileHover={{ y: -8 }}
-                  transition={{ type: "spring", stiffness: 500, delay: index * 0.05 }}
+                  whileHover={{ y: -5 }}
+                  transition={{ type: "spring", stiffness: 300, delay: index * 0.05 }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   aria-label={social.label}
                 >
                   <social.icon size={18} className="sm:w-5 sm:h-5 relative z-10 text-foreground group-hover:text-primary transition-colors" />
-                  <motion.div 
-                    className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity"
-                    initial={{ scale: 0 }}
-                    whileHover={{ scale: 1 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  />
                 </motion.a>
               ))}
             </div>
             
-            {/* CTA Buttons with improved design */}
+            {/* CTA Buttons */}
             <motion.div 
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
               initial={{ opacity: 0, y: 20 }}
@@ -193,14 +183,12 @@ const HeroSection = () => {
             >
               <Button size="lg" className="gap-2 rounded-full px-6 sm:px-8 font-medium relative overflow-hidden group w-full sm:w-auto">
                 <span className="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-80 group-hover:opacity-100 transition-opacity"></span>
-                <span className="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-primary bg-size-200 animate-gradient-x opacity-0 group-hover:opacity-100"></span>
                 <span className="relative z-10 flex items-center gap-2">
                   <Download size={18} /> Download CV
                 </span>
               </Button>
               <Button size="lg" variant="outline" className="gap-2 rounded-full px-6 sm:px-8 font-medium border-2 border-primary/50 hover:border-primary relative overflow-hidden group w-full sm:w-auto" asChild>
                 <a href="#projects">
-                  <span className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10 opacity-0 group-hover:opacity-100 transition-opacity"></span>
                   <span className="relative z-10 flex items-center gap-2">
                     View Projects <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                   </span>
@@ -216,17 +204,12 @@ const HeroSection = () => {
             className="flex justify-center order-1 lg:order-2"
           >
             <div className="relative">
-              {/* Rotating circles around profile */}
+              {/* Simplified rotating circles */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <motion.div 
-                  className="w-[calc(100%+2rem)] sm:w-[calc(100%+3rem)] h-[calc(100%+2rem)] sm:h-[calc(100%+3rem)] rounded-full border-2 border-dashed border-primary/20 absolute"
+                  className="w-[calc(100%+2rem)] sm:w-[calc(100%+3rem)] h-[calc(100%+2rem)] sm:h-[calc(100%+3rem)] rounded-full border border-dashed border-primary/20 absolute"
                   animate={{ rotate: 360 }}
-                  transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                />
-                <motion.div 
-                  className="w-[calc(100%+4rem)] sm:w-[calc(100%+6rem)] h-[calc(100%+4rem)] sm:h-[calc(100%+6rem)] rounded-full border-2 border-dashed border-secondary/20 absolute"
-                  animate={{ rotate: -360 }}
-                  transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                 />
               </div>
               
@@ -248,85 +231,67 @@ const HeroSection = () => {
                 </motion.div>
               ))}
 
-              {/* Decorative circle behind profile image */}
+              {/* Simplified decorative circle */}
               <motion.div 
-                className="absolute -inset-4 rounded-full bg-gradient-to-r from-primary/30 via-secondary/20 to-primary/10 blur-xl"
+                className="absolute -inset-4 rounded-full bg-gradient-to-r from-primary/20 via-secondary/10 to-primary/5 blur-xl"
                 animate={{ 
-                  scale: [1, 1.05, 1],
-                  opacity: [0.5, 0.8, 0.5]
+                  scale: [1, 1.02, 1],
+                  opacity: [0.3, 0.5, 0.3]
                 }}
                 transition={{ 
-                  duration: 8, 
+                  duration: 6, 
                   repeat: Infinity,
                   ease: "easeInOut" 
                 }}
               />
               
-              {/* Profile image with simple border */}
+              {/* Profile image */}
               <motion.div 
                 className="profile-image w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 xl:w-96 xl:h-96 shadow-2xl rounded-full overflow-hidden relative z-20"
-                whileHover={{ scale: 1.03 }}
+                whileHover={{ scale: 1.02 }}
                 transition={{ 
                   type: "spring", 
-                  stiffness: 150, 
-                  damping: 15 
+                  stiffness: 200, 
+                  damping: 20 
                 }}
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-primary animate-gradient-rotation rounded-full opacity-70"></div>
-                <div className="absolute inset-[4px] rounded-full overflow-hidden bg-card">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-primary opacity-60 rounded-full"></div>
+                <div className="absolute inset-[3px] rounded-full overflow-hidden bg-card">
                   <img 
-                    src={profileImage} 
+                    src="/attached_assets/image_1746211336500.png" 
                     alt="Prashant - Web Developer and UI/UX Designer" 
                     className="w-full h-full object-cover"
                   />
                 </div>
               </motion.div>
               
-              {/* Floating badges with enhanced animations and proper z-index */}
+              {/* Floating badges with proper z-index */}
               <motion.div 
-                className="absolute top-3 sm:top-5 -left-6 sm:-left-10 bg-card/90 backdrop-blur-md p-2 sm:p-3 rounded-xl shadow-lg flex items-center gap-1 sm:gap-2 border border-primary/20 overflow-hidden z-30"
+                className="absolute top-3 sm:top-5 -left-6 sm:-left-10 bg-card/90 backdrop-blur-md p-2 sm:p-3 rounded-xl shadow-lg flex items-center gap-1 sm:gap-2 border border-primary/20 z-40"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.5, duration: 0.5 }}
-                whileHover={{ 
-                  scale: 1.05,
-                  boxShadow: "0 10px 30px -10px rgba(var(--primary), 0.3)" 
-                }}
+                whileHover={{ scale: 1.05 }}
               >
                 <div className="text-primary font-semibold text-sm sm:text-base">5+</div>
                 <div className="text-xs sm:text-sm font-poppins">Years Experience</div>
-                <motion.div 
-                  className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10"
-                  initial={{ x: "-100%" }}
-                  whileHover={{ x: "100%" }}
-                  transition={{ duration: 0.8 }}
-                />
               </motion.div>
               
               <motion.div 
-                className="absolute bottom-6 sm:bottom-10 -right-3 sm:-right-5 bg-card/90 backdrop-blur-md p-2 sm:p-3 rounded-xl shadow-lg flex items-center gap-1 sm:gap-2 border border-secondary/20 overflow-hidden z-30"
+                className="absolute bottom-6 sm:bottom-10 -right-3 sm:-right-5 bg-card/90 backdrop-blur-md p-2 sm:p-3 rounded-xl shadow-lg flex items-center gap-1 sm:gap-2 border border-secondary/20 z-40"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.8, duration: 0.5 }}
-                whileHover={{ 
-                  scale: 1.05,
-                  boxShadow: "0 10px 30px -10px rgba(var(--secondary), 0.3)" 
-                }}
+                whileHover={{ scale: 1.05 }}
               >
                 <div className="text-secondary font-semibold text-sm sm:text-base">40+</div>
                 <div className="text-xs sm:text-sm font-poppins">Projects Completed</div>
-                <motion.div 
-                  className="absolute inset-0 bg-gradient-to-r from-secondary/10 to-primary/10"
-                  initial={{ x: "-100%" }}
-                  whileHover={{ x: "100%" }}
-                  transition={{ duration: 0.8 }}
-                />
               </motion.div>
             </div>
           </motion.div>
         </div>
         
-        {/* Features grid with enhanced animations */}
+        {/* Features grid with proper spacing */}
         <motion.div 
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -341,22 +306,14 @@ const HeroSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.2 + index * 0.2, duration: 0.6 }}
               whileHover={{ 
-                y: -10, 
+                y: -5, 
                 backgroundColor: "hsl(var(--card)/0.6)",
                 borderColor: index % 2 === 0 ? "hsl(var(--primary)/0.4)" : "hsl(var(--secondary)/0.4)"
               }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-10 transition-opacity duration-500 ease-in-out z-0"
-                style={{
-                  background: index % 2 === 0 
-                    ? "linear-gradient(to bottom right, hsl(var(--primary)), hsl(var(--secondary)))" 
-                    : "linear-gradient(to bottom right, hsl(var(--secondary)), hsl(var(--primary)))"
-                }}
-              />
-              
               <motion.div 
                 className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full ${index % 2 === 0 ? 'bg-primary/10' : 'bg-secondary/10'} flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition-all duration-300 relative z-10`}
-                whileHover={{ rotate: [0, -10, 10, -10, 0] }}
+                whileHover={{ rotate: [0, -5, 5, -5, 0] }}
                 transition={{ duration: 0.5 }}
               >
                 <feature.icon className={index % 2 === 0 ? 'text-primary' : 'text-secondary'} size={20} />
@@ -364,15 +321,6 @@ const HeroSection = () => {
               
               <h3 className="font-alegreya text-lg sm:text-xl font-semibold mb-2 relative z-10">{feature.title}</h3>
               <p className="text-muted-foreground text-xs sm:text-sm relative z-10 font-poppins">{feature.description}</p>
-              
-              <motion.div 
-                className="absolute bottom-0 right-0 w-16 h-16 sm:w-20 sm:h-20 opacity-10"
-                initial={{ rotate: 0 }}
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              >
-                <div className={`w-full h-full rounded-full border-2 ${index % 2 === 0 ? 'border-primary' : 'border-secondary'} border-dashed`}></div>
-              </motion.div>
             </motion.div>
           ))}
         </motion.div>
